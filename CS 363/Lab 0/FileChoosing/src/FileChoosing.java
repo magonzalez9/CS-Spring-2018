@@ -1,29 +1,31 @@
-
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
- * @author levenick Jan 8, 2018 12:47:02 PM
+ * @author Marco
  */
 public class FileChoosing {
     
     public static void main(String[] args) {
         
-//        File f= new File("src");
+//        File f = new File("Source Packages/");
 //        String currentDirectory = f.getAbsolutePath();
 //        System.out.println("currentDirectory = " + currentDirectory);
         
-        new FileChoosing().printFilesInADirectorySelectedByTheUser();
+       new FileChoosing().printFilesInADirectorySelectedByTheUser();
     }
-    
+        
     void printFilesInADirectorySelectedByTheUser() {        
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser(); 
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        // Prompt for file selection
         int returnVal = fc.showOpenDialog(new JFrame());
         
-        if (returnVal != JFileChooser.APPROVE_OPTION) {  // make sure it worked
-            System.out.println("so sad...");
+        // Check for errors
+        if (returnVal != JFileChooser.APPROVE_OPTION) {  
+            System.out.println("Error");
             return;  // give up, go home
         }
         
@@ -36,6 +38,7 @@ public class FileChoosing {
     void printContentsOfDirectory(File f) {
         for (File nextFile : f.listFiles()) {
             System.out.println("\tnextFile = " + nextFile);
+            System.out.println("PATH: "+nextFile.getAbsolutePath());
         }
     }
     
