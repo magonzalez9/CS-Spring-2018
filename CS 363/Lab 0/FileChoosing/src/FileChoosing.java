@@ -34,21 +34,21 @@ public class FileChoosing {
         System.out.println(f);
 
         // Print contents
-        printContentsOfDirectory(f);
+        printContentsOfDirectory(f,"  ");
     }
 
-    void printContentsOfDirectory(File f) {
-
+    void printContentsOfDirectory(File f, String tab) {
         for (File nextFile : f.listFiles()) {
-                   
-            System.out.println(nextFile);
-
+            System.out.println(tab+nextFile);
             // Print recoursively
             if (nextFile.isDirectory() && nextFile.listFiles() != null) {
-
-               
-
-                printContentsOfDirectory(nextFile);
+                tab += "    ";
+                printContentsOfDirectory(nextFile,tab);
+            } 
+            // Print file(s)
+            if (nextFile.isFile() && nextFile.listFiles() != null){
+                tab ="  ";
+                System.out.println(tab+nextFile);
             }
         }
     }
