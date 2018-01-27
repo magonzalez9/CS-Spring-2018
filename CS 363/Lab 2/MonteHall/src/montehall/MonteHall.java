@@ -5,19 +5,6 @@
  */
 package montehall;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
-
-/**
- *
- * @author marco
- */
 public class MonteHall {
 
     /**
@@ -27,8 +14,9 @@ public class MonteHall {
 
         MonteFrame myFrame = new MonteFrame();
         myFrame.setVisible(true);
-        myFrame.setSize(800,800);
-
+        myFrame.setSize(1000,1000);
+       
+        
     }
 
 }
