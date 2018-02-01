@@ -14,10 +14,7 @@ static DataPairList list = new DataPairList();
     public static void main(String[] args) {
         
         new GraphControls();
-        
- 
-        
-    }
+//       
 //        int h = 10000;
 //        int h2 = h;
 //        int p = 10;
@@ -26,7 +23,7 @@ static DataPairList list = new DataPairList();
 //        // Î² = beta Î± =
 //           
 //        int t=0;
-//        while (h>0 && p >0  ) {
+//        while (h>0 && p >0) {
 //            int hp =h*p;
 //            int hp2 =h2*p2;
 //            h += a*h - α*hp;
@@ -42,8 +39,8 @@ static DataPairList list = new DataPairList();
 //            list.add(new DataPair(h,p));
 //            
 //        }
-//            System.out.println( list.get(0).h);
-//
-//   }
+//            //System.out.println( list);
+
+  }
 
 }

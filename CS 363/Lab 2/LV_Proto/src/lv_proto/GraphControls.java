@@ -10,8 +10,14 @@ package lv_proto;
  * @author marco
  */
 public class GraphControls extends javax.swing.JFrame {
-    
-    private DisplayGrapher otherFrame; 
+
+    private DisplayGrapher displayFrame;
+    int h = 10000;
+    int h2 = h;
+    int p = 10;
+    int p2 = p;
+    double a, b, α, β;
+    static DataPairList list = new DataPairList();
 
     /**
      * Creates new form GraphControls
@@ -45,9 +51,12 @@ public class GraphControls extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+
+        aTextField.setText(".05");
         getContentPane().add(aTextField);
         aTextField.setBounds(270, 50, 70, 20);
 
+        bTextField.setText(".1");
         bTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bTextFieldActionPerformed(evt);
@@ -55,9 +64,17 @@ public class GraphControls extends javax.swing.JFrame {
         });
         getContentPane().add(bTextField);
         bTextField.setBounds(270, 90, 70, 20);
+
+        alphaTextField.setText(".00001");
+        alphaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alphaTextFieldActionPerformed(evt);
+            }
+        });
         getContentPane().add(alphaTextField);
         alphaTextField.setBounds(270, 130, 70, 20);
 
+        betaTextField.setText(".00001");
         betaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 betaTextFieldActionPerformed(evt);
@@ -119,8 +136,33 @@ public class GraphControls extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldActionPerformed
 
     private void graphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphButtonActionPerformed
-    makeTheOtherFrame();
+        makeTheOtherFrame();
+        a = Double.parseDouble(aTextField.getText());
+        b = Double.parseDouble(bTextField.getText());
+        α = Double.parseDouble(alphaTextField.getText());
+        β = Double.parseDouble(betaTextField.getText()); 
+        
+        // Populate list
+        while (h > 0 && p > 0) {
+            int hp = h * p;
+            int hp2 = h2 * p2;
+            h += a * h - α * hp;
+            p += β * hp - b * p;
+            int dh = (int) (a * h2 - α * hp2);
+            int dp = (int) (β * hp2 - b * p2);
+            h2 += dh;
+            p2 += dp;
+            
+            list.add(new DataPair(h, p));
+        }
+        
+        // Send list to otherFrame
+        displayFrame.go(list);
     }//GEN-LAST:event_graphButtonActionPerformed
+
+    private void alphaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alphaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alphaTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +212,6 @@ public class GraphControls extends javax.swing.JFrame {
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
  private void makeTheOtherFrame() {
-        otherFrame = new DisplayGrapher();
+        displayFrame = new DisplayGrapher();
     }
 }

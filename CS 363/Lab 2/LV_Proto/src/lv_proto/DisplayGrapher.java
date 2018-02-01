@@ -71,8 +71,8 @@ public class DisplayGrapher extends javax.swing.JFrame {
         });
     }
     
-    void go() {
-        gPanel.go();
+    void go(DataPairList list) {
+        gPanel.go(list);
         repaint();
     }
 
