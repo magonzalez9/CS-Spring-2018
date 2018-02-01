@@ -13,7 +13,6 @@ public class Lab0aFrame extends javax.swing.JFrame {
         fillBox();
         makeTheOtherFrame();
         setTitle("Lab0a");
-
         this.setSize(500, 500);
         setVisible(true);
     }

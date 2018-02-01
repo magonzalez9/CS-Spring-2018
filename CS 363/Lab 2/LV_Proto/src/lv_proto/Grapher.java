@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lv_proto;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
@@ -18,9 +12,6 @@ import javax.swing.border.TitledBorder;
  */
 public class Grapher extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Grapher
-     */
     public Grapher() {
         initComponents(); 
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.YELLOW, 5),
@@ -31,11 +22,13 @@ public class Grapher extends javax.swing.JPanel {
 
     }
     
+    @Override
     public void paintComponent(Graphics g){
-
+       if (g == null) {
+            return;
+        }
         g.fillOval(100, 100, 100, 100);
         super.paintComponent(g);
-        Rectangle r = this.getVisibleRect();
         
     }
      
@@ -60,7 +53,7 @@ public class Grapher extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 void go() {
-       repaint();
+     
     }
 
 

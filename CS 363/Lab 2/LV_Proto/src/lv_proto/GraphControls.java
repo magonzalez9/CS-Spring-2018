@@ -13,13 +13,6 @@ public class GraphControls extends javax.swing.JFrame {
     
     private DisplayGrapher otherFrame; 
 
-//    static DataPairList list = new DataPairList();
-//    int h = 10000;
-//    int h2 = h;
-//    int p = 10;
-//    int p2 = p;
-//    double a, b, α, β;
-
     /**
      * Creates new form GraphControls
      */
