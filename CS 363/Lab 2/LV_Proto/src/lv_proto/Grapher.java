@@ -1,11 +1,8 @@
 package lv_proto;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.Collections;
-import javax.swing.BorderFactory;
-import javax.swing.border.TitledBorder;
+import java.awt.Rectangle;
 
 /**
  *
@@ -13,18 +10,15 @@ import javax.swing.border.TitledBorder;
  */
 public class Grapher extends javax.swing.JPanel {
 
-    DataPairList dp_list;
-    int max;
-    int min;
-
     public Grapher() {
         initComponents();
-        setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.YELLOW, 5),
-                "Grapher", TitledBorder.CENTER, 0));
         setLayout(null);
         setVisible(true);
         setPreferredSize(new Dimension(2000, 2000));
     }
+    // Data
+    DataPairList dp_list;
+    int left, top, rows, right, bottom, max, pairSize;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -32,15 +26,29 @@ public class Grapher extends javax.swing.JPanel {
             return;
         }
         super.paintComponent(g);
-        g.fillOval(100, 100, 100, 100);
+        paintAxis(g);
+        System.out.println("LEFT + " + left);
 
-        System.out.println("List: " +dp_list);
-        System.out.println(dp_list.getMax());
-        
-
+//        System.out.println("List: " + dp_list);
+//        System.out.println(max);
     }
 
     public void paintAxis(Graphics g) {
+        max = dp_list.getMax();
+        pairSize = dp_list.size();
+
+        Rectangle r = this.getVisibleRect();
+        left = r.x + 20;
+        top = r.y + 10;
+        right = left + r.width + pairSize;
+        bottom = top + r.height - 20;
+
+        g.drawLine(left, bottom, right, bottom); //x line
+        g.drawLine(left, top, left, bottom); //x 
+
+    }
+
+    public void paintCircles(Graphics g) {
 
     }
 

@@ -55,6 +55,70 @@ m[,3]
 m[1:2, 3]
 m[3] #careful with this 
 
+# List
+alist <-list('Hello World', TRUE, 2:5, 3.141232)
+alist[[1]]
+alist[[3]]
+alist[[3]][[3]] #to index, use double bracket
+
+# Can add to list by naming element
+alist[['me']] <- 'new element'
+alist
+
+alist$me
+alist[[5]]
+
+x <- 1 : 5
+x 
+x <- append(x, 4:6)
+x
+# R uses lexical scoping: a free variable is looked up in the environment in which it is defined
+# Dynamic Scoping: the variable is looked up in the environment in which it is called
+
+y <- 10
+f <- function(x){
+  y <-2
+  y^2 + g(x)
+}
+
+g <- function(x){
+ x*y 
+}
+
+f(3)
+
+# Allows you to define function inside another function 
+
+create_power <- function(n){
+  power <- function (x) {
+  x ^ n    
+  }  
+}
+
+square <- create_power(2)
+cube <- create_power(3)
+
+square(2)
+cube(3)
+
+# determine working directory
+getwd()
+list.files()
+#setwd() <- working direcory
+climate <- read.csv('climate_data.csv')
+str(climate)
+summary(climate)
+dim(climate)
+head(climate, 3)
+tail(climate, 3)
+length(climate)
+climate[2:4, 3:6]
+climate[,1]
+names(climate)
+climate$Ozone
+mean(climate$Ozone)
+mean(climate$Ozone, na.rm = TRUE) #Remove NA's
+
 
 
 
