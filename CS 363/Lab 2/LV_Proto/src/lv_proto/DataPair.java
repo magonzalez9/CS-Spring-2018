@@ -10,11 +10,12 @@ package lv_proto;
  * @author marco
  */
 public class DataPair {
-    
-      protected int h;
+
+    protected int h;
     protected int p;
 
-    public DataPair(){}   //empty default constructor
+    public DataPair() {
+    }   //empty default constructor
 
     public DataPair(int h, int p) {   //initializing constructor
         this();   // invoke the default constructor
@@ -22,11 +23,21 @@ public class DataPair {
         this.p = p;
     }
 
-    public int getH() {return h;}
-    public int getP() {return p;}
+    public int getH() {
+        return h;
+    }
 
-    public void setH(int h) { this.h = h;}
-    public void setP(int p) { this.p = p;}
+    public int getP() {
+        return p;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
+
+    public void setP(int p) {
+        this.p = p;
+    }
 
     public String toString() {
         String returnMe = "";
@@ -34,5 +45,5 @@ public class DataPair {
         returnMe += " p=" + getP();
         return returnMe;
     } // toString()
-    
+
 }

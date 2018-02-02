@@ -10,15 +10,15 @@ import java.awt.Rectangle;
  */
 public class Grapher extends javax.swing.JPanel {
 
+    DataPairList dp_list;
+    int left, top, rows, right, bottom, hMax, hMin, pairSize, hRange, graphRange;
+
     public Grapher() {
         initComponents();
         setLayout(null);
         setVisible(true);
         setPreferredSize(new Dimension(2000, 2000));
     }
-    // Data
-    DataPairList dp_list;
-    int left, top, rows, right, bottom, max, pairSize;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -27,25 +27,50 @@ public class Grapher extends javax.swing.JPanel {
         }
         super.paintComponent(g);
         paintAxis(g);
-        System.out.println("LEFT + " + left);
-
-//        System.out.println("List: " + dp_list);
-//        System.out.println(max);
+        drawTicks(g);
     }
 
     public void paintAxis(Graphics g) {
-        max = dp_list.getMax();
         pairSize = dp_list.size();
 
         Rectangle r = this.getVisibleRect();
-        left = r.x + 20;
+        left = r.x + 40;
         top = r.y + 10;
         right = left + r.width + pairSize;
-        bottom = top + r.height - 20;
+        bottom = top + r.height - 30;
 
         g.drawLine(left, bottom, right, bottom); //x line
-        g.drawLine(left, top, left, bottom); //x 
+        g.drawLine(left, top, left, bottom); //y
+    }
 
+    public void drawTicks(Graphics g) {
+        hMax = dp_list.getMax();
+        hMin = dp_list.getMin();
+        hRange = hMax - hMin;
+        
+        int hInc = hRange/5; 
+        int yVal = 0; 
+        int sy = hMax; 
+        String tickValue = ""; 
+        
+        for (int y = hMin; y <= hMax; y+=hInc) {
+            yVal = valueToPixels(y); 
+            tickValue = "" + y;  
+            System.out.println(valueToPixels(y));
+            g.drawOval((left-10), valueToPixels(y), 5, 5);
+            g.drawString(tickValue, left-40, valueToPixels(sy));
+            sy -= hInc; 
+            
+            if (sy < 0){
+                g.drawString(tickValue, left-40, valueToPixels(1500));
+            }
+            System.out.println("SY: " + sy + " - " + hInc);
+            
+        }
+    }
+
+    public int valueToPixels(int input) {
+        return (input - hMin) * ((bottom)) / (hRange);
     }
 
     public void paintCircles(Graphics g) {

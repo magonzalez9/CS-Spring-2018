@@ -39,6 +39,32 @@ class DataPairList extends ArrayList<DataPair> {
         }
     }
 
+    public int getMin() {
+        int hTemp = 0;
+        int pTemp = 0;
+        int hMin = 0;
+        int pMin = 0;
+
+        for (DataPair nextPair : this) {
+            if (nextPair.h < hTemp) {
+                hMin = nextPair.h;
+            }
+
+            if (nextPair.p < pTemp) {
+                pMin = nextPair.p;
+            }
+
+            hTemp = nextPair.h;
+            pTemp = nextPair.p;
+        }
+
+        if (hMin < pMin) {
+            return hMin;
+        } else {
+            return pMin;
+        }
+    }
+
     @Override
     public String toString() {
         String returnMe = "DPLIST:";
