@@ -55,7 +55,7 @@ class DataPairList extends ArrayList<DataPair> {
     }
 
     public int getpMax() {
-        
+         
         return pMax;
     }
 
