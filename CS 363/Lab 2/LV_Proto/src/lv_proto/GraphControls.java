@@ -11,7 +11,8 @@ package lv_proto;
  */
 public class GraphControls extends javax.swing.JFrame {
 
-    private DisplayGrapher displayFrame;
+    private DisplayGrapher displayGrapher;
+    private DisplayPhase displayPhase;
     int h = 10000;
     int h2 = h;
     int p = 10;
@@ -48,6 +49,7 @@ public class GraphControls extends javax.swing.JFrame {
         betaLabel = new javax.swing.JLabel();
         textField = new javax.swing.JTextField();
         graphButton = new javax.swing.JButton();
+        phaseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -120,6 +122,15 @@ public class GraphControls extends javax.swing.JFrame {
         getContentPane().add(graphButton);
         graphButton.setBounds(270, 210, 73, 23);
 
+        phaseButton.setText("Phase");
+        phaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phaseButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(phaseButton);
+        phaseButton.setBounds(270, 250, 80, 23);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,8 +151,8 @@ public class GraphControls extends javax.swing.JFrame {
         a = Double.parseDouble(aTextField.getText());
         b = Double.parseDouble(bTextField.getText());
         α = Double.parseDouble(alphaTextField.getText());
-        β = Double.parseDouble(betaTextField.getText()); 
-        
+        β = Double.parseDouble(betaTextField.getText());
+
         // Populate list
         while (h > 0 && p > 0) {
             int hp = h * p;
@@ -152,17 +163,44 @@ public class GraphControls extends javax.swing.JFrame {
             int dp = (int) (β * hp2 - b * p2);
             h2 += dh;
             p2 += dp;
-            
+
             list.add(new DataPair(h, p));
         }
-        
+
         // Send list to otherFrame
-        displayFrame.go(list);
+        displayGrapher.go(list);
     }//GEN-LAST:event_graphButtonActionPerformed
 
     private void alphaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alphaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alphaTextFieldActionPerformed
+
+    private void phaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phaseButtonActionPerformed
+        // TODO add your handling code here:
+        makePhaseGrapher();
+        a = Double.parseDouble(aTextField.getText());
+        b = Double.parseDouble(bTextField.getText());
+        α = Double.parseDouble(alphaTextField.getText());
+        β = Double.parseDouble(betaTextField.getText());
+
+        // Populate list
+        while (h > 0 && p > 0) {
+            int hp = h * p;
+            int hp2 = h2 * p2;
+            h += a * h - α * hp;
+            p += β * hp - b * p;
+            int dh = (int) (a * h2 - α * hp2);
+            int dp = (int) (β * hp2 - b * p2);
+            h2 += dh;
+            p2 += dp;
+
+            list.add(new DataPair(h, p));
+        }
+
+        // Send list to otherFrame
+        displayPhase.go(list);
+
+    }//GEN-LAST:event_phaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,9 +247,14 @@ public class GraphControls extends javax.swing.JFrame {
     private javax.swing.JLabel betaLabel;
     private javax.swing.JTextField betaTextField;
     private javax.swing.JButton graphButton;
+    private javax.swing.JButton phaseButton;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
- private void makeTheOtherFrame() {
-        displayFrame = new DisplayGrapher();
+    private void makeTheOtherFrame() {
+        displayGrapher = new DisplayGrapher();
+    }
+
+    private void makePhaseGrapher() {
+        displayPhase = new DisplayPhase();
     }
 }

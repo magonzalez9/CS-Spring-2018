@@ -12,24 +12,19 @@ import java.util.ArrayList;
  * @author marco
  */
 class DataPairList extends ArrayList<DataPair> {
+    private int pMax, pMin, hMax, hMin;
 
     public int getMax() {
-        int hTemp = 0;
-        int pTemp = 0;
-        int hMax = 0;
-        int pMax = 0;
-
+        pMax = 0;
+        hMax = 0; 
         for (DataPair nextPair : this) {
-            if (nextPair.h > hTemp) {
+            if (nextPair.h > hMax) {
                 hMax = nextPair.h;
             }
 
-            if (nextPair.p > pTemp) {
+            if (nextPair.p > pMax) {
                 pMax = nextPair.p;
             }
-
-            hTemp = nextPair.h;
-            pTemp = nextPair.p;
         }
 
         if (hMax > pMax) {
@@ -40,22 +35,16 @@ class DataPairList extends ArrayList<DataPair> {
     }
 
     public int getMin() {
-        int hTemp = 0;
-        int pTemp = 0;
-        int hMin = 0;
-        int pMin = 0;
-
+        hMin = hMax; 
+        pMin = pMax; 
         for (DataPair nextPair : this) {
-            if (nextPair.h < hTemp) {
+            if (nextPair.h < hMin) {
                 hMin = nextPair.h;
             }
 
-            if (nextPair.p < pTemp) {
+            if (nextPair.p < pMin) {
                 pMin = nextPair.p;
             }
-
-            hTemp = nextPair.h;
-            pTemp = nextPair.p;
         }
 
         if (hMin < pMin) {
@@ -64,6 +53,24 @@ class DataPairList extends ArrayList<DataPair> {
             return pMin;
         }
     }
+
+    public int getpMax() {
+        
+        return pMax;
+    }
+
+    public int getpMin() {
+        return pMin;
+    }
+
+    public int gethMax() {
+        return hMax;
+    }
+
+    public int gethMin() {
+        return hMin;
+    }
+    
 
     @Override
     public String toString() {

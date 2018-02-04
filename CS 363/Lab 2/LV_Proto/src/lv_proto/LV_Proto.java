@@ -14,6 +14,7 @@ static DataPairList list = new DataPairList();
     public static void main(String[] args) {
         
         new GraphControls();
+
 //       
 //        int h = 10000;
 //        int h2 = h;

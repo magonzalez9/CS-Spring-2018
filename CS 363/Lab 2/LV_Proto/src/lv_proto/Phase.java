@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lv_proto;
 
 import java.awt.Color;
@@ -9,19 +14,19 @@ import java.awt.Rectangle;
  *
  * @author marco
  */
-public class Grapher extends javax.swing.JPanel {
+public class Phase extends javax.swing.JPanel {
 
     DataPairList dp_list;
     int yOffset = 10, left, top, rows, right, bottom;
-    int hMax, hMin, pairSize, hRange, graphRange;
-
-    public Grapher() {
+    int pMax, pMin, hMax, hMin, pairSize, hRange, pRange, graphRange;
+    
+    public Phase() {
         initComponents();
         setLayout(null);
         setVisible(true);
         setPreferredSize(new Dimension(2000, 2000));
     }
-
+    
     @Override
     public void paintComponent(Graphics g) {
         if (g == null) {
@@ -48,6 +53,11 @@ public class Grapher extends javax.swing.JPanel {
         g.drawLine(left, bottom, right, bottom); // x Axis
         g.drawLine(left, top, left, bottom); // y Axis
         g.drawLine(left, top, right, top); // top x Axis
+    }
+    
+    public void paintXAxis(){
+        Rectangle r = this.getVisibleRect();
+        
     }
 
     public void drawTicks(Graphics g) {
@@ -99,12 +109,21 @@ public class Grapher extends javax.swing.JPanel {
     }
 
     public void setValues() {
+        dp_list.getMax();
+        dp_list.getMin(); 
         pairSize = dp_list.size();
-        hMax = dp_list.getMax();
-        hMin = dp_list.getMin();
+        pMax = dp_list.getpMax(); 
+        pMin = dp_list.getpMin();
+        hMax = dp_list.gethMax();
+        hMin = dp_list.gethMin();
         hRange = hMax - hMin;
-        System.out.println("Max: " + hMax);
-        System.out.println("Min: " + hMin);
+        pRange = pMax = pMin; 
+        
+        System.out.println("hMax: " + hMax);
+        System.out.println("hMin: " + hMin);
+        
+        System.out.println("pMax: " + pMax);
+        System.out.println("pMin: " + pMin);
         System.out.println(dp_list);
 
     }
@@ -115,11 +134,9 @@ public class Grapher extends javax.swing.JPanel {
 
         setLayout(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    void go(DataPairList list) {
-        this.dp_list = list;
+    void go(DataPairList list){
+        this.dp_list = list; 
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
