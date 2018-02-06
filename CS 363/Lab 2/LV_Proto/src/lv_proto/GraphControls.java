@@ -7,7 +7,7 @@ package lv_proto;
 
 /**
  *
- * @author marco gonzALEZ
+ * @author marco
  */
 public class GraphControls extends javax.swing.JFrame {
 
