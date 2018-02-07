@@ -1,18 +1,16 @@
 #categorize
-head(datasets)
-datasets$agecat <-cut(datasets$Age, c(-Inf,0,18,24,34,44,54,64,Inf))
+#i <- 1
+#filename <- "~/Desktop/data/nyt".i.".csv"
 
-#view
-summary(datasets)
+#loop
+for (day in 1:31){
+  #print(paste("The day is", day))
+  temp <- paste(c("~/Desktop/data/nyt", day), collapse = "")
+  filename <- paste(temp, ".csv", sep="")
+  print(filename)
+  
+  data<-read.csv(filename)
+  
+  summary(data)
+}
 
-#brackets
-install.packages("doBy")
-library("doBy")
-siterange <- function(x){c(length(x), min(x),mean(x),max(x))}
-summaryBy(Age~agecat, data =datasets, FUN=siterange)
-
-#plot
-install.packages("ggplot2")
-library(ggplot2)
-
-plot(x,y)
