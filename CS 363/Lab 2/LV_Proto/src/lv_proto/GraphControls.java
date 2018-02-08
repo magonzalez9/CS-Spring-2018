@@ -27,6 +27,7 @@ public class GraphControls extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         this.setSize(500, 500);
+        graphButton.setEnabled(false);
 
     }
 

@@ -24,7 +24,7 @@ public class Phase extends javax.swing.JPanel {
         initComponents();
         setLayout(null);
         setVisible(true);
-        setPreferredSize(new Dimension(2000, 2000));
+        setPreferredSize(new Dimension(3000, 3000));
     }
 
     @Override
