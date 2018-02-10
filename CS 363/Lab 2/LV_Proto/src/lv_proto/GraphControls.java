@@ -5,6 +5,8 @@
  */
 package lv_proto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author marco
@@ -13,12 +15,14 @@ public class GraphControls extends javax.swing.JFrame {
 
     private DisplayGrapher displayGrapher;
     private DisplayPhase displayPhase;
-    int h = 10000;
+    int h;
     int h2 = h;
-    int p = 10;
+    int p;
     int p2 = p;
     double a, b, α, β;
+    int listCount;
     static DataPairList list = new DataPairList();
+    ArrayList<DataPairList> all_lists = new ArrayList<>();
 
     /**
      * Creates new form GraphControls
@@ -51,13 +55,18 @@ public class GraphControls extends javax.swing.JFrame {
         textField = new javax.swing.JTextField();
         graphButton = new javax.swing.JButton();
         phaseButton = new javax.swing.JButton();
+        pField = new javax.swing.JTextField();
+        hField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        pointsText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         aTextField.setText(".05");
         getContentPane().add(aTextField);
-        aTextField.setBounds(270, 50, 70, 20);
+        aTextField.setBounds(270, 50, 70, 26);
 
         bTextField.setText(".1");
         bTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +121,7 @@ public class GraphControls extends javax.swing.JFrame {
             }
         });
         getContentPane().add(textField);
-        textField.setBounds(10, 40, 180, 240);
+        textField.setBounds(10, 160, 180, 120);
 
         graphButton.setText("Graph");
         graphButton.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +130,7 @@ public class GraphControls extends javax.swing.JFrame {
             }
         });
         getContentPane().add(graphButton);
-        graphButton.setBounds(270, 210, 73, 23);
+        graphButton.setBounds(270, 210, 73, 29);
 
         phaseButton.setText("Phase");
         phaseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +139,37 @@ public class GraphControls extends javax.swing.JFrame {
             }
         });
         getContentPane().add(phaseButton);
-        phaseButton.setBounds(270, 250, 80, 23);
+        phaseButton.setBounds(270, 250, 80, 29);
+
+        pField.setText("10");
+        pField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pField);
+        pField.setBounds(170, 50, 70, 26);
+
+        hField.setText("10000");
+        getContentPane().add(hField);
+        hField.setBounds(170, 90, 70, 26);
+
+        jLabel1.setText("P");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(160, 50, 20, 20);
+
+        jLabel2.setText("H");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(160, 90, 10, 16);
+
+        pointsText.setText("10");
+        pointsText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pointsTextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pointsText);
+        pointsText.setBounds(170, 130, 26, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,6 +222,9 @@ public class GraphControls extends javax.swing.JFrame {
         b = Double.parseDouble(bTextField.getText());
         α = Double.parseDouble(alphaTextField.getText());
         β = Double.parseDouble(betaTextField.getText());
+        p = Integer.parseInt(pField.getText());
+        h = Integer.parseInt(hField.getText());
+        listCount = Integer.parseInt(pointsText.getText());
 
         // Populate list
         while (h > 0 && p > 0) {
@@ -196,12 +238,38 @@ public class GraphControls extends javax.swing.JFrame {
             p2 += dp;
 
             list.add(new DataPair(h, p));
-        }
 
+        }
+        for (int i = 0; i < listCount; i++) {
+            //chang p and h
+
+            while (h > 0 && p > 0) {
+                int hp = h * p;
+                int hp2 = h2 * p2;
+                h += a * h - α * hp;
+                p += β * hp - b * p;
+                int dh = (int) (a * h2 - α * hp2);
+                int dp = (int) (β * hp2 - b * p2);
+                h2 += dh;
+                p2 += dp;
+
+                list.add(new DataPair(h, p));
+            }
+            all_lists.add(list);
+        }
         // Send list to otherFrame
         displayPhase.go(list);
 
+
     }//GEN-LAST:event_phaseButtonActionPerformed
+
+    private void pFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pFieldActionPerformed
+
+    private void pointsTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointsTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pointsTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,7 +316,12 @@ public class GraphControls extends javax.swing.JFrame {
     private javax.swing.JLabel betaLabel;
     private javax.swing.JTextField betaTextField;
     private javax.swing.JButton graphButton;
+    private javax.swing.JTextField hField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField pField;
     private javax.swing.JButton phaseButton;
+    private javax.swing.JTextField pointsText;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
     private void makeTheOtherFrame() {

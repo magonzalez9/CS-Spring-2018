@@ -60,11 +60,6 @@ public class Phase extends javax.swing.JPanel {
         g.drawLine(left, top, right, top); // top x Axis
     }
 
-    public void paintXAxis() {
-        Rectangle r = this.getVisibleRect();
-
-    }
-
     public void drawTicks(Graphics g) {
         int hInc = hRange / 5;
         int hY = hMax;
