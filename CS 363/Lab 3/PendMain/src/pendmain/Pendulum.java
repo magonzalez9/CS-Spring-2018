@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package pendmain;
+
 import java.awt.Graphics;
+
 /**
  *
  * @author Marco
@@ -35,28 +37,28 @@ public class Pendulum {
         this.xPivot = x;
         this.yPivot = y;
         vTheta = 0;
-        length = Math.hypot(x-mouseX, y-mouseY);
-        theta = Math.atan2(mouseX-x, mouseY-y);
+        length = Math.hypot(x - mouseX, y - mouseY);
+        theta = Math.atan2(mouseX - x, mouseY - y);
     }
 
     void paint(Graphics g) {
-        double displayTheta = theta + Math.PI*3/2;   //down, I hope!
+        double displayTheta = theta + Math.PI * 3 / 2;   //down, I hope!
         int xEnd = xEnd(displayTheta);
         int yEnd = yEnd(displayTheta);
         g.drawLine(xPivot, yPivot, xEnd, yEnd);
-        g.fillOval(xEnd-5, yEnd-5, 10, 10);
+        g.fillOval(xEnd - 5, yEnd - 5, 10, 10);
     }
 
-    int xEnd (double theta) {
-        return (int)(xPivot+length*Math.cos(theta));
+    int xEnd(double theta) {
+        return (int) (xPivot + length * Math.cos(theta));
     }
-    
-    int yEnd (double theta) {
-        return (int)(yPivot-length*Math.sin(theta));
+
+    int yEnd(double theta) {
+        return (int) (yPivot - length * Math.sin(theta));
     }
-    
+
     void step() {
-        vTheta -= (force+Math.sin(theta))/length;
+        vTheta -= (force + Math.sin(theta)) / length;
         theta += vTheta;
     }
 

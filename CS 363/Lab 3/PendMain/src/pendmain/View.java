@@ -30,7 +30,6 @@ public class View extends javax.swing.JPanel {
 //        super.paintComponent(g);
 //        g.fillOval(100, 100, 100, 100);            // Just checking!
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

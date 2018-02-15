@@ -1,24 +1,25 @@
-
 package pendmain;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 /**
  *
  * @author Marco
  */
 class Controller extends Thread {
+
     boolean running = false;
     Model theModel;
     private final View theView;
-    
+
     Controller(View thePanel) {
         this.theView = thePanel;
         theModel = new Model();
     }
 
-
     public void run() {
-        for(;;) {
+        for (;;) {
             if (running) {
                 theModel.step();
                 theView.repaint();
@@ -26,7 +27,7 @@ class Controller extends Thread {
             delay();
         }
     }
-    
+
     void toggleRunning() {
         running = !running;
     }
@@ -42,12 +43,12 @@ class Controller extends Thread {
     private void delay() {
         try {
             sleep(33);
-        } catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     void addPend(Pendulum pendulum) {
         theModel.add(pendulum);
     }
-
 
 }
