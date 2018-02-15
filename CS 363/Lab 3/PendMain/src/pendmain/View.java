@@ -13,12 +13,12 @@ public class View extends javax.swing.JPanel {
     public View() {
         initComponents();
         theController = new Controller(this);
-        theController.addPend(new Pendulum(320, 200, 0.01, 0, 300));
-        theController.addPend(new Pendulum(300, 200, 0.05, 0, 300));
+        theController.addPend(new Pendulum(320, 200, 0.05, 0, 300));
+        theController.addPend(new Pendulum(300, 200, 0.01, 0, 300));
         theController.addPend(new Pendulum(280, 200, 0, 0, 300));
+        theController.addPend(new Pendulum(260, 200, -.01, 0, 300));
+        theController.addPend(new Pendulum(240, 200, -.05, 0, 300));
         theController.start();
-//      setLayout(null);              // doesn't work!! the Buttons don't show up until you set the Layout with the Form designer :(
-//      setVisible(true);             // not ne
     }
 
     public void paintComponent(Graphics g) {
@@ -26,10 +26,6 @@ public class View extends javax.swing.JPanel {
         theController.paint(g);
     }
 
-//    public void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        g.fillOval(100, 100, 100, 100);            // Just checking!
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -24,9 +24,14 @@ public class Model {
         Pendulum p1 = list.get(0);
         Pendulum p2 = list.get(1);
         Pendulum p3 = list.get(2);
+        Pendulum p4 = list.get(3); 
+        Pendulum p5 = list.get(4); 
+        
         p1.setForce(-calcForce(p1, p2));
         p2.setForce(calcForce(p2, p1) - calcForce(p3, p2));
-        p3.setForce(calcForce(p2, p3));
+        p3.setForce(calcForce(p3, p2) - calcForce(p4, p3));
+        p4.setForce(calcForce(p4,p3) - calcForce(p5, p4));
+        p5.setForce(calcForce(p5, p4));
 
         for (Pendulum nextP : list) {
             nextP.step();

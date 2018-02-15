@@ -19,6 +19,8 @@ public class Pendulum {
     protected double vTheta;
     protected double length;
     double force;
+    double G = 100000;
+    double timestep = .00001; 
 
     public Pendulum() {
     }   //empty default constructor
@@ -58,7 +60,8 @@ public class Pendulum {
     }
 
     void step() {
-        vTheta -= (force + Math.sin(theta)) / length;
+        vTheta -= (force + Math.sin(theta)*G*timestep) / length;
+        vTheta *= .999;
         theta += vTheta;
     }
 
