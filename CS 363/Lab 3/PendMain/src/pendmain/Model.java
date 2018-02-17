@@ -21,16 +21,21 @@ public class Model {
     }
 
     void step() {
+
+//        for (int i = 0; i < list.size(); i++) {
+//            Pendulum next = list.get(i);
+//            next.setForce(calcForce(next, next.getLeft()) - calceForce(next, next.getRight()));
+//        }
         Pendulum p1 = list.get(0);
         Pendulum p2 = list.get(1);
         Pendulum p3 = list.get(2);
-        Pendulum p4 = list.get(3); 
-        Pendulum p5 = list.get(4); 
-        
+        Pendulum p4 = list.get(3);
+        Pendulum p5 = list.get(4);
+
         p1.setForce(-calcForce(p1, p2));
         p2.setForce(calcForce(p2, p1) - calcForce(p3, p2));
         p3.setForce(calcForce(p3, p2) - calcForce(p4, p3));
-        p4.setForce(calcForce(p4,p3) - calcForce(p5, p4));
+        p4.setForce(calcForce(p4, p3) - calcForce(p5, p4));
         p5.setForce(calcForce(p5, p4));
 
         for (Pendulum nextP : list) {
@@ -39,6 +44,9 @@ public class Model {
     }
 
     double calcForce(Pendulum p1, Pendulum p2) {
+        if (p1 == null || p2 == null) {
+            return 0;
+        }
         return M / distanceThing(p1, p2);
     }
 
@@ -46,7 +54,7 @@ public class Model {
         double d = Math.hypot(p1.xEnd(p1.getTheta()) - p2.xEnd(p2.getTheta()),
                 p1.yEnd(p1.getTheta()) - p2.yEnd(p2.getTheta()));
 
-        return d * d * d * d;
+        return Math.pow(d, 4);
     }
 
     private void paintPends(Graphics g) {

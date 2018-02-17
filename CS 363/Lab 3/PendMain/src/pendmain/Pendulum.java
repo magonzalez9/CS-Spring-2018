@@ -50,6 +50,13 @@ public class Pendulum {
         g.drawLine(xPivot, yPivot, xEnd, yEnd);
         g.fillOval(xEnd - 5, yEnd - 5, 10, 10);
     }
+    
+    int xEndDisplay(){
+        return (int) (xPivot+length * Math.sin(theta +Math.PI * 3 / 2));
+    }
+    int yEndDisplay(){
+        return (int) (yPivot+length * Math.cos(theta +Math.PI * 3 / 2));
+    }
 
     int xEnd(double theta) {
         return (int) (xPivot + length * Math.cos(theta));

@@ -12,13 +12,18 @@ public class View extends javax.swing.JPanel {
 
     public View() {
         initComponents();
+        reset(); 
+    }
+    
+    void reset(){
         theController = new Controller(this);
-        theController.addPend(new Pendulum(320, 200, 0.05, 0, 300));
+        theController.addPend(new Pendulum(320, 200, .2, 0, 300));
         theController.addPend(new Pendulum(300, 200, 0.01, 0, 300));
         theController.addPend(new Pendulum(280, 200, 0, 0, 300));
-        theController.addPend(new Pendulum(260, 200, -.01, 0, 300));
-        theController.addPend(new Pendulum(240, 200, -.05, 0, 300));
+        theController.addPend(new Pendulum(260, 200, 0, 0, 300));
+        theController.addPend(new Pendulum(240, 200, 0, 0, 300));
         theController.start();
+        
     }
 
     public void paintComponent(Graphics g) {
@@ -31,6 +36,7 @@ public class View extends javax.swing.JPanel {
     private void initComponents() {
 
         goButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -47,6 +53,15 @@ public class View extends javax.swing.JPanel {
         });
         add(goButton);
         goButton.setBounds(90, 10, 200, 80);
+
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+        add(resetButton);
+        resetButton.setBounds(320, 10, 78, 29);
     }// </editor-fold>//GEN-END:initComponents
 
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
@@ -64,9 +79,15 @@ public class View extends javax.swing.JPanel {
         repaint();
     }//GEN-LAST:event_formMousePressed
 
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_resetButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton goButton;
+    private javax.swing.JButton resetButton;
     // End of variables declaration//GEN-END:variables
 
 }
