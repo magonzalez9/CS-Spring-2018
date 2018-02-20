@@ -23,3 +23,5 @@ linearMod <- lm(dist ~ speed, data = cars) #x and y would be two columns in the 
 print(linearMod)
 
 summary(linearMod)
+
+plot(density(cars$speed))
