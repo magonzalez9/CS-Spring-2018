@@ -10,23 +10,6 @@ import java.awt.*;
 public class VehicleApp extends java.applet.Applet {
     
     Controller theController;
-    Image offScreen;
-    
-    /** Initializes the applet VehicleApp */
-    public void init() {
-        //System.out.println("initing");
-        initComponents();
-        reset();
-    }
-    
-    void reset() {
-        theController = new Controller(this);
-        offScreen = this.createImage(1500, 1500);
-        ProtoWorld.setOffG(offScreen.getGraphics()); 
-        ProtoWorld.setOffScreenImage(offScreen);
-        setSize(1500,1500);
-        theController.start();
-    }
 
 //    public void stop() {
 //        System.out.println("adieu"); 

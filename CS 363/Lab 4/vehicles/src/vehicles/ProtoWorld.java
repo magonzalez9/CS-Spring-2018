@@ -15,29 +15,13 @@ import java.awt.geom.Point2D;
  */
 public class ProtoWorld extends AbstractWorld {
 
-    private static Image offScreenImage;    // workspace for painting
-    private static Graphics offG;           // it's graphic context
-
-    /**
-     * @param aOffScreenImage the offScreenImage to set
-     */
-    public static void setOffScreenImage(Image aOffScreenImage) {
-        offScreenImage = aOffScreenImage;
-    }
-
-    /**
-     * @param aOffG the offG to set
-     */
-    public static void setOffG(Graphics aOffG) {
-        offG = aOffG;
-    }
-    boolean debugging = false;
+     boolean debugging = false;
 
     /**
      * Creates a new instance of ProtoWorld
      */
     public ProtoWorld() {
-        for (int x = 0; x < 10; x++) {
+        for (int x = 0; x < 1000; x++) {
             //addVehicle(new ProtoVehicle(new Point2D.Double(400, 800), Math.PI/2, randBool()));
             addVehicle(new ProtoVehicle(new Point2D.Double(600 + rand(100) + x / 10, 600 + rand(100) + x / 10), 3 * Math.PI / 4, randBool()));
         }
@@ -145,15 +129,12 @@ public class ProtoWorld extends AbstractWorld {
      * @param g - the Graphics context...
      */
     public void paint(Graphics g) {
-        offG.setColor(Color.white);
-        offG.fillRect(0, 0, 1000, 1000);            // clear 1000x1000 pixels... shouldn't those 1000s be constants??
         for (AbstractSource nextLightSource : theSourceList) {
-            nextLightSource.paint(offG);
+            nextLightSource.paint(g);
         }
         for (AbstractVehicle nextVehicle : theVehicleList) {
-            nextVehicle.paint(offG);
+            nextVehicle.paint(g);
         }
-        g.drawImage(offScreenImage, 0, 0, null);
     }
 
 }

@@ -14,12 +14,12 @@ public class VFrame extends javax.swing.JFrame {
     /**
      * Creates new form VFrame
      */
-    public VFrame() {
+        public VFrame() {
         initComponents();
-        add (new VFramePanel());
-        setBounds(300,300,300,300);
+        setTitle("My lovely vehicle frame");
+        add(new VFramePanel());
+        setBounds(200,200,500,500);
         setVisible(true);
-        
     }
 
     /**

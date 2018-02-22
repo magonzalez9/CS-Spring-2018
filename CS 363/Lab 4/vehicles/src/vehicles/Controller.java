@@ -13,15 +13,15 @@ import java.awt.*;
 /** Runs the World, Threaded so the animation works. */
 public class Controller extends Thread {
     
-    Applet theApplet;       // the View!
+    VFramePanel thePanel;       // the View!
     int stepsToTake;
     AbstractWorld theWorld;  // the Model!
     
     /** Creates a new instance of Controller
      * @param theApplet The calling Applet, so the Controller can repaint() it.
      */
-    public Controller(Applet theApplet) {
-        this.theApplet = theApplet;
+    public Controller(VFramePanel p) {
+        thePanel = p;
         theWorld = new ProtoWorld();
     }
     
@@ -50,7 +50,7 @@ public class Controller extends Thread {
     /** Does one step -- step, repaint, pause */    
     private void step() {
         theWorld.step();
-        theApplet.repaint();
+        thePanel.repaint();
      }
     
     /** Waits a bit
