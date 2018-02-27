@@ -7,18 +7,24 @@ package vehicles;
 
 /**
  *
- * @author Marco
+ * @author Dylan Miyashiro
  */
-public class VFrame extends javax.swing.JFrame {
+public class VehicleFrame extends javax.swing.JFrame {
 
+    
+    VehiclePanel vP;
+    
     /**
-     * Creates new form VFrame
+     * Creates new form VehicleFrame
      */
-        public VFrame() {
+    public VehicleFrame() {
         initComponents();
-        setTitle("My lovely vehicle frame");
-        add(new VFramePanel());
-        setBounds(200,200,500,500);
+        
+        vP = new VehiclePanel();
+        add(vP);
+        
+        setTitle("Hello! I'm vehicle");
+        setSize(1500,1500);
         setVisible(true);
     }
 
@@ -53,20 +59,20 @@ public class VFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VFrame().setVisible(true);
+                new VehicleFrame().setVisible(true);
             }
         });
     }

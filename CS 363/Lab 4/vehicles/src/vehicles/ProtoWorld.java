@@ -15,15 +15,16 @@ import java.awt.geom.Point2D;
  */
 public class ProtoWorld extends AbstractWorld {
 
-     boolean debugging = false;
+    boolean debugging = false;
 
     /**
      * Creates a new instance of ProtoWorld
      */
     public ProtoWorld() {
-        for (int x = 0; x < 1000; x++) {
+        for (int x = 0; x < 100; x++) {
             //addVehicle(new ProtoVehicle(new Point2D.Double(400, 800), Math.PI/2, randBool()));
             addVehicle(new ProtoVehicle(new Point2D.Double(600 + rand(100) + x / 10, 600 + rand(100) + x / 10), 3 * Math.PI / 4, randBool()));
+            addVehicle(new ProtoLoveVehicle(new Point2D.Double(600 + rand(100) + x / 10, 600 + rand(100) + x / 10), 3 * Math.PI / 4, randBool()));
         }
         addSource(new LightSource(new Point2D.Double(300, 300), 16550));
         //addSource(new LightSource(new Point2D.Double(320,300),100));
@@ -33,17 +34,6 @@ public class ProtoWorld extends AbstractWorld {
         //addSource(new LightSource(new Point2D.Double(300,520),200));
         addSource(new LightSource(new Point2D.Double(500, 500), 18670));
         addSource(new LightSource(new Point2D.Double(567, 345), 186700));   // so bright!!
-        //addSource(new LightSource(new Point2D.Double(520,500),200));
-//        addSource(new LightSource(new Point2D.Double(600,300),10000));
-//        addSource(new LightSource(new Point2D.Double(300,600),10000));
-//        addSource(new LightSource(new Point2D.Double(200,400),10000));
-//        addSource(new LightSource(new Point2D.Double(300,100),10000));
-//        addSource(new LightSource(new Point2D.Double(300,200),10000));
-//        addSource(new LightSource(new Point2D.Double(300,400),10000));
-//        for (int i=0; i<10; i++) {
-//            addSource(new LightSource(new Point2D.Double(50+i*77,250),10000));
-//
-//        }
     }
 
     int rand(int max) {
@@ -129,12 +119,24 @@ public class ProtoWorld extends AbstractWorld {
      * @param g - the Graphics context...
      */
     public void paint(Graphics g) {
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 1000, 1000);            // clear 1000x1000 pixels... shouldn't those 1000s be constants??
         for (AbstractSource nextLightSource : theSourceList) {
             nextLightSource.paint(g);
         }
         for (AbstractVehicle nextVehicle : theVehicleList) {
             nextVehicle.paint(g);
         }
+    }
+
+    @Override
+    public void flushVehicles() {
+        this.theVehicleList = new VehicleList();
+    }
+
+    @Override
+    public void flushSources() {
+        this.theSourceList = new SourceList();
     }
 
 }

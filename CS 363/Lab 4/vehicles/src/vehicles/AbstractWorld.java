@@ -57,4 +57,16 @@ public abstract class AbstractWorld {
      * @param g The Graphics context (from the Applet).
      */    
     abstract public void paint(Graphics g);
+
+    /** Clears all vehicles from current sim.
+     * 
+     */
+    abstract public void flushVehicles();
+    
+    /** Clears all sources from current sim.
+    *
+    */
+    abstract public void flushSources();
+    
+    
 }

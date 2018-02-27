@@ -74,17 +74,7 @@ public class ProtoVehicle extends AbstractVehicle {
         double right = theWorld.getStimulusStrength(rightSensorLocation());
         double left = theWorld.getStimulusStrength(leftSensorLocation());
 
-        if (mySensors.theSensors.size() > 1) {
-            System.out.println("okay... time to generalize ProtoVehicle:step to sum all the drives!!");
-            assert (false);
-        }
-
-        // only one sensor...
-        for (AbstractSensor nextSensor : mySensors.theSensors) {
-            if (nextSensor.getCrossed()) {
-                return new GenericDriveOutput(right, left);  // backwards
-            }
-        }
+   
         return new GenericDriveOutput(left, right);
     }
 

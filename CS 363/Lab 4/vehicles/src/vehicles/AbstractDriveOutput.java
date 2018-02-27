@@ -5,6 +5,7 @@ package vehicles;
  */
 public class AbstractDriveOutput {
     static final int MAX_OUTPUT = 8;
+    static final int MIN_OUTPUT = 0;
     
     /** Creates a new instance of AbstractDriveOutput */
     public AbstractDriveOutput() {
@@ -29,6 +30,8 @@ public class AbstractDriveOutput {
     public void setLeftWheelOutput(double nuLeftWheelOutput) {
         if (nuLeftWheelOutput>MAX_OUTPUT)
             leftWheelOutput = MAX_OUTPUT;
+        else if(nuLeftWheelOutput<MIN_OUTPUT)
+             leftWheelOutput = MIN_OUTPUT;
         else leftWheelOutput = nuLeftWheelOutput;
     }
     /** accessor, not! caps the output
@@ -37,6 +40,8 @@ public class AbstractDriveOutput {
     public void setRightWheelOutput(double nuRightWheelOutput) {
         if (nuRightWheelOutput>MAX_OUTPUT)
              rightWheelOutput = MAX_OUTPUT;
+        else if(nuRightWheelOutput<MIN_OUTPUT)
+             rightWheelOutput = MIN_OUTPUT;
         else rightWheelOutput = nuRightWheelOutput;
     }
     

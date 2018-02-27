@@ -13,15 +13,25 @@ import java.awt.*;
 /** Runs the World, Threaded so the animation works. */
 public class Controller extends Thread {
     
-    VFramePanel thePanel;       // the View!
+    Applet theApplet;       // the View!
+    VehiclePanel vPanel;        // the Better View!
+    boolean runningBool = false;
+    
+    int delayNum = 33;
+    
     int stepsToTake;
     AbstractWorld theWorld;  // the Model!
     
     /** Creates a new instance of Controller
      * @param theApplet The calling Applet, so the Controller can repaint() it.
      */
-    public Controller(VFramePanel p) {
-        thePanel = p;
+    public Controller(Applet theApplet) {
+        this.theApplet = theApplet;
+        theWorld = new ProtoWorld();
+    }
+    
+    public Controller(VehiclePanel vP) {
+        this.vPanel = vP;
         theWorld = new ProtoWorld();
     }
     
@@ -33,7 +43,21 @@ public class Controller extends Thread {
     }
     
     /** Add one to the number of steps to take. */    
-    public void incSteps() {stepsToTake++;}
+    public void toggleRunning(){
+        runningBool = !runningBool;
+    }
+    
+    public void incStep(){
+        stepsToTake = 1;
+    }
+    
+    public void incSteps(){
+        
+    }
+    
+    public void flushVehicles(){
+        theWorld.flushVehicles();
+    }
     
     /** Forever loop, controlled by the variable stepsToTake */    
     public void run() {
@@ -42,16 +66,27 @@ public class Controller extends Thread {
             if (stepsToTake > 0) {      // if we should take a step, do so
                 stepsToTake--;
                 step();
+            } else if(runningBool){
+                step();
             }
-            delay(33);                  // always delay, to avoid spin-lock
+            delay(delayNum);                  // always delay, to avoid spin-lock
          }
    }
     
     /** Does one step -- step, repaint, pause */    
     private void step() {
         theWorld.step();
-        thePanel.repaint();
+        vPanel.repaint();
      }
+    
+    void setDelay(int d){
+        this.delayNum = d;
+    }
+    
+    int getDelay(){
+       return this.delayNum; 
+    }
+    
     
     /** Waits a bit
      * @param t num milliseconds to pause
@@ -61,5 +96,17 @@ public class Controller extends Thread {
         try {
             sleep(t);  
         } catch (Exception e) {}
+    }
+
+    void addVehicle(AbstractVehicle vehicle) {
+        theWorld.addVehicle(vehicle);
+    }
+    
+    void addSource(AbstractSource source){
+        theWorld.addSource(source);
+    }
+
+    void flushSources() {
+        theWorld.flushSources();
     }
 }
