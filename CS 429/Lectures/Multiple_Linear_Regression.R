@@ -66,4 +66,4 @@ plot(mod2, pch=16, which = 1)
 
 # mod 3
 mod3 = lm (log(income)~ prestige.c + I(prestige.c^2) + women.c + I(women.c^2), data = newdata)
-
+summary(mod3)
