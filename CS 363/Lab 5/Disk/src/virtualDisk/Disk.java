@@ -72,6 +72,7 @@ public class Disk {
         return returnMe;
     }
 
+    /************************************READ AND WRITE TO DISK ****************************/
     public static void main(String[] args) {
         Globals.init();   // create the Disk
         System.out.println("Globals = " + Globals.display());  // see Globals constants
