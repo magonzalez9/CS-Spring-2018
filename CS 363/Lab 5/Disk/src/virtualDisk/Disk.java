@@ -72,11 +72,14 @@ public class Disk {
         return returnMe;
     }
 
-    /************************************READ AND WRITE TO DISK ****************************/
+    /**
+     * **********************************READ AND WRITE TO DISK
+     * ***************************
+     */
     public static void main(String[] args) {
         Globals.init();   // create the Disk
         System.out.println("Globals = " + Globals.display());  // see Globals constants
-        
+
         Disk theDisk = Globals.getTheDisk();  // the Disk lives in Globals
         BlockList inodeFreeList = theDisk.createFreeInodeList();
         BlockList blockFreeList = theDisk.createFreeDataBlockList();
@@ -84,34 +87,52 @@ public class Disk {
         // see how the Disk displays when disk is empty
         System.out.println("Initially, theDisk = " + theDisk);
 
-    
-        /*********Begin to add *************/
+        /**
+         * *******Begin to add ************
+         */
         // see if the Inode works at all... remember the free lists contain numbers, not blocks!
         Inode theInode = (Inode) theDisk.blocks[inodeFreeList.remove(0)];  // grab the first one
-        theInode.setSize((short) 4); 
-        theInode.setDirectLink((short) 8);
+        theInode.setSize((short) 24);
+        // theInode.setDirectLink((short) 16);
+        //theInode.setIndirectLink((short) 16);
+
         System.out.println("anInode with the size set to 2 and direct link to 4 = " + theInode);
 
         // Get a data block and write to it... this is the beginning of what the FileSystem will do
-        short blockNumber = blockFreeList.remove(0);
-        DataBlock aDataBlock = (DataBlock) theDisk.blocks[blockNumber];
+        short block_1 = blockFreeList.remove(0);
+        DataBlock aDataBlock = (DataBlock) theDisk.blocks[block_1];
         byte[] data = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
         aDataBlock.write(data);
-        theInode.setSize((short) data.length);
-        theInode.setDirectLink(blockNumber);
+        theInode.setDirectLink(block_1);
+
+        // Get a data block and write to it... this is the beginning of what the FileSystem will do
+        short block_2 = blockFreeList.remove(0);
+        DataBlock bDataBlock = (DataBlock) theDisk.blocks[block_2];
+        byte[] data2 = {'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'};
+        bDataBlock.write(data2);
+        theInode.setIndirectLink(block_2);
         
+        // Add third block?
+        short block_3 = blockFreeList.remove(0);
+        DataBlock cDataBlock = (DataBlock) theDisk.blocks[block_3];
+        byte[] data3 = {'q', 'r', 's', 't', 'u', 'v', 'w', 'x'};
+        cDataBlock.write(data3);
+        theInode.setIndirectLink(block_3);
         
         //Print the inode and disk status
-        System.out.println("theInode = " + theInode);
-        System.out.println("a b c d e f g:" + aDataBlock);
+        //System.out.println("theInode = " + theInode);
+        //System.out.println("a b c d e f g:" + aDataBlock);
         System.out.println("\nWith one little file; theDisk = " + theDisk);
-        
         //Show completion message.
-        Globals.complain("I'm done!!");
+        //Globals.complain("I'm done!!");
+
+        // My own test
+        System.out.println("READ PLEASE: " + theInode.load());
     }
 
     /**
      * An example of using a JOptionPane
+     *
      * @return the filename
      */
     String getFN() {

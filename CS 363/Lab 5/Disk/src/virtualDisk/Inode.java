@@ -59,13 +59,16 @@ public class Inode extends Block {
      
     String load() {
         // always direct... 
+        
         String returnMe = "";
                 
         returnMe += makeString(Globals.getTheDisk().read(getDirectLink()));  // read the direct link
 
         //if there's an indirect link...
+         returnMe += makeString(Globals.getTheDisk().read(getIndirectLink())) + makeString(Globals.getTheDisk().read(getIndirectLink()));
 
         //if there's a double indirect link...
+        returnMe += makeString(Globals.getTheDisk().read(getDoubleIndirectLink()));
 
         return returnMe;
     }
