@@ -81,27 +81,32 @@ public class Disk {
         BlockList inodeFreeList = theDisk.createFreeInodeList();
         BlockList blockFreeList = theDisk.createFreeDataBlockList();
 
-        // see how the Disk displays
-        System.out.println("Initially... theDisk = " + theDisk);
+        // see how the Disk displays when disk is empty
+        System.out.println("Initially, theDisk = " + theDisk);
 
+    
+        /*********Begin to add *************/
         // see if the Inode works at all... remember the free lists contain numbers, not blocks!
         Inode theInode = (Inode) theDisk.blocks[inodeFreeList.remove(0)];  // grab the first one
-        theInode.setSize((short) 2);
-        theInode.setDirectLink((short) 4);
+        theInode.setSize((short) 4); 
+        theInode.setDirectLink((short) 8);
         System.out.println("anInode with the size set to 2 and direct link to 4 = " + theInode);
 
-        // assuming that worked, time to 
-        // try out getting a data block and writing to it... this is the beginning of what the FileSystem will do
+        // Get a data block and write to it... this is the beginning of what the FileSystem will do
         short blockNumber = blockFreeList.remove(0);
         DataBlock aDataBlock = (DataBlock) theDisk.blocks[blockNumber];
-        byte[] data = {'a', 'b', 'c', 'd'};
+        byte[] data = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
         aDataBlock.write(data);
         theInode.setSize((short) data.length);
         theInode.setDirectLink(blockNumber);
-        System.out.println("...and now... theInode = " + theInode);
-
-        System.out.println("abcd?? I hope! " + aDataBlock);
+        
+        
+        //Print the inode and disk status
+        System.out.println("theInode = " + theInode);
+        System.out.println("a b c d e f g:" + aDataBlock);
         System.out.println("\nWith one little file; theDisk = " + theDisk);
+        
+        //Show completion message.
         Globals.complain("I'm done!!");
     }
 

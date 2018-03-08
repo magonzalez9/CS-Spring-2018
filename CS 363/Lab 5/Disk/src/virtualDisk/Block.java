@@ -40,7 +40,7 @@ public abstract class Block {
     }
 
     public String toString() {
-        String returnMe = "I am a Block (and am abstract!!), this should never display!!.";
+        String returnMe = "I am a Block (and am abstract!!), this should never display!";
 
         return returnMe;
     }

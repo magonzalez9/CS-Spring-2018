@@ -1,8 +1,5 @@
 package virtualDisk;
 
-/**
- * DataBlock.java created by levenick on Oct 8, 2013 at 1:32:33 PM
- */
 class DataBlock extends Block {
 
     public DataBlock() {
@@ -20,10 +17,10 @@ class DataBlock extends Block {
     } // toString()
     
     String ifIWereDoubleIndirect() {
-        return "... if di...";
+        return "  double_indirect  ";//... if di...
     }   
     String ifIWereIndirect() {
-        return "... if i...";
+        return "  indirect  "; //... if i...
     }   
     String ifIWereData() {
         String returnMe = " if data: ";

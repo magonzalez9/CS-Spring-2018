@@ -49,9 +49,9 @@ public class Inode extends Block {
         returnMe += "\tdirectLink=" + getDirectLink();
         short indirectBlock = getIndirectLink();
         if (indirectBlock == 0) {
-            returnMe += " \n\t\tno indirects...";
+            returnMe += " \n\t\tno indirects!";
         } else {
-            returnMe += "\n\t\ttime to write the rest of this!!";
+            returnMe += "\n\t\ttime to write the rest of this!";
         }
         return returnMe;
     } // toString()
