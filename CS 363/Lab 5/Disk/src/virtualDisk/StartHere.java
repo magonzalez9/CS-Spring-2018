@@ -14,21 +14,10 @@ public class StartHere {
         DiskEditor editor = new DiskEditor();
         editor.setVisible(true);
 
-//        byte[][] inputData = new byte[2][8];
-//
-//        for (int i = 0; i < 8; i++) {
-//            inputData[0][i] = (byte) 'h';
-//        }
-//        for (int i = 0; i < 8; i++) {
-//            inputData[1][i] = (byte) 'i';
-//        }
-//        
-//        if (inputData[0][0] == 0){
-//            System.out.println("false");
-//        }
-//        for (byte val:inputData[1]) {
-//            System.out.println(val);
-//        }
+        for (int i = 0; i <= 6; i += 2) {
+            System.out.println(i);
+        }
+
     }
 
     static void playWithStrings() {

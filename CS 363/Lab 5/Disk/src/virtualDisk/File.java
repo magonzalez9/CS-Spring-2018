@@ -14,6 +14,7 @@ public class File {
     private final String name;
     private final int inode_number;
     private Inode inode;
+    private int dataLength; 
 
     public File(String name, int InodeNumb) {
         this.name = name;
@@ -32,7 +33,8 @@ public class File {
         return inode;
     }
 
-    public void setInode(Inode inode) {
+    public void setInode(Inode inode, int dataLength) {
         this.inode = inode;
+        inode.setDataLength(dataLength);
     }
 }

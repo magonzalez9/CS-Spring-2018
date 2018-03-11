@@ -1,6 +1,6 @@
 /*
-Class FileSystem
-   Saves and loads data (direct only)
+ Class FileSystem
+ Saves and loads data (direct only)
  */
 package virtualDisk;
 
@@ -16,6 +16,7 @@ public class FileSystem {
     Disk theDisk = Globals.getTheDisk();  // the Disk lives in Globals
     BlockList inodeFreeList = theDisk.createFreeInodeList();
     BlockList blockFreeList = theDisk.createFreeDataBlockList();
+    int dataLength = 0;
 
     public FileSystem() {
 
@@ -25,7 +26,7 @@ public class FileSystem {
         // Begin to add. 
         Inode theInode = (Inode) theDisk.blocks[inodeFreeList.remove(file.getInodeNumber())];  // grab the first one
         theInode.setSize((short) data.length());
-        file.setInode(theInode);
+        file.setInode(theInode, data.length());
 
         // Set array
         byte[][] inputData = new byte[30][8];
@@ -44,101 +45,70 @@ public class FileSystem {
             }
         }
 
-        for (byte val : inputData[0]) {
-            System.out.println(val);
-        }
-        System.out.println("AGAIN----");
-        for (byte val : inputData[1]) {
-            System.out.println(val);
-        }
-        System.out.println("AGAIN----");
-        for (byte val : inputData[2]) {
-            System.out.println(val);
-        }
-
-        // Load to direct
+        // Save to direct
         short block_1 = blockFreeList.remove(0);
         DataBlock aDataBlock = (DataBlock) theDisk.blocks[block_1];
         aDataBlock.write(inputData[0]);
         theInode.setDirectLink(block_1);
 
-        // Set Indirect Block
-        short indirect_block = blockFreeList.remove(0);
-        DataBlock id = (DataBlock) theDisk.blocks[indirect_block];
-        theInode.setIndirectLink(indirect_block);
+        System.out.println("LENGTH!: " + inputData[0].length);
 
-        // Load data into indirect block
-        int iBlock = 0;
-        for (int i = 1; i <= 4; i++) {
-            if (inputData[i][0] != 0) {
-                short block = blockFreeList.remove(0);
-                DataBlock dBlock = (DataBlock) theDisk.blocks[block];
-                id.setLink(iBlock, block); // 0,2,4,6
-                dBlock.write(inputData[i]);
-                iBlock += 2;
-            } else {
-                break;
-            }
-        }
+        if (data.length() > 8) {
 
-        // Load into double indirect block.
-        short double_indirectBlock = blockFreeList.remove(0);
-        DataBlock double_id = (DataBlock) theDisk.blocks[double_indirectBlock];
-        theInode.setDoubleIndirectLink(double_indirectBlock);
+            // Set Indirect Block
+            short indirect_block = blockFreeList.remove(0);
+            DataBlock id = (DataBlock) theDisk.blocks[indirect_block];
+            theInode.setIndirectLink(indirect_block);
 
-        // Load data into indirect block
-        int diBlock = 0;
-        for (int i = 5; i <= 20; i++) {
-            if (inputData[i][0] != 0) {
-                short block = blockFreeList.remove(0);
-                DataBlock dBlock = (DataBlock) theDisk.blocks[block];
-                id.setLink(diBlock, block); // 0,2,4,6
-                dBlock.write(inputData[i]);
-
-                diBlock += 2;
-                if (diBlock >= 6) {
-                    diBlock = 0;
+            // Save data into indirect block
+            int iBlock = 0;
+            for (int i = 1; i <= 4; i++) {
+                if (inputData[i][0] != 0) {
+                    short block = blockFreeList.remove(0);
+                    DataBlock dBlock = (DataBlock) theDisk.blocks[block];
+                    id.setLink(iBlock, block); // 0,2,4,6
+                    dBlock.write(inputData[i]);
+                    iBlock += 2;
+                } else {
+                    break;
                 }
-            } else {
-                break;
             }
         }
 
-        // Add indirect block
-//        
-        // Store stuff in inderect block
-//        short block_2 = blockFreeList.remove(0);
-//        DataBlock bDataBlock = (DataBlock) theDisk.blocks[block_2];
-//        id.setLink(0, block_2);
-//        byte[] data2 = {'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'};
-//        bDataBlock.write(data2);
-//
-//        short block_3 = blockFreeList.remove(0);
-//        DataBlock cDataBlock = (DataBlock) theDisk.blocks[block_3];
-//        id.setLink(2, block_3);
-//        byte[] data3 = {'q', 'r', 's', 't', 'u', 'v', 'w', 'x'};
-//        cDataBlock.write(data3);
-        //Print the inode and disk status
-        //System.out.println("\nWith one little file; theDisk = " + theDisk);
-        //Globals.complain("I'm done!!");
-        // Load Test
-        System.out.println("LOADING DATA: " + theInode.load());
-        //Load indirect data
-//        byte[] a = theDisk.blocks[theDisk.blocks[theInode.getIndirectLink()].decodeLink(0)].read();
-//        String buffer = "";
-//        for (int i = 0; i < a.length; i++) {
-//            buffer += (char) a[i] + "";
-//        }
-//        System.out.println("" + buffer);
+        if (data.length() > 40) {
+            // Create double indirect block
+            short double_indirectBlock = blockFreeList.remove(0);
+            DataBlock double_id = (DataBlock) theDisk.blocks[double_indirectBlock];
+            theInode.setDoubleIndirectLink(double_indirectBlock);
+            int db_count = 5;
+            for (int i = 0; i <= 6; i += 2) {
+                // Create blocks pointing to double indirect block
+                short block_di = blockFreeList.remove(0);
+                DataBlock finalDiBlock = (DataBlock) theDisk.blocks[block_di];
+                double_id.setLink(i, block_di);
+
+                for (int j = 0; j <= 6; j += 2) {
+                    if (inputData[db_count][0] != 0) {
+                        // Add the actual data
+                        short double_dataBlock = blockFreeList.remove(0);
+                        DataBlock fDataBlock = (DataBlock) theDisk.blocks[double_dataBlock];
+                        finalDiBlock.setLink(j, double_dataBlock);
+                        fDataBlock.write(inputData[db_count]);
+                        db_count++;
+                    } else {
+                        db_count++;
+                        break;
+                    }
+                }
+            }
+        }
+       
+        // Display the disk
         System.out.println(theDisk);
     }
 
     public String load(File file) {
         System.out.println(theDisk);
         return file.getInode().load();
-    }
-
-    public byte[] addArray(byte[] strings) {
-        return strings;
     }
 }
