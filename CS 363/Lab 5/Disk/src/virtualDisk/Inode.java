@@ -56,22 +56,36 @@ public class Inode extends Block {
         return returnMe;
     } // toString()
 
-     
     String load() {
         // always direct... 
         String returnMe = "";
-                
+
         returnMe += makeString(Globals.getTheDisk().read(getDirectLink()));  // read the direct link
 
         //if there's an indirect link...
-        returnMe += makeString(Globals.getTheDisk().read(getIndirectLink()));
+        for (int i = 0; i <= 6; i += 2) {
+            byte[] a = Globals.getTheDisk().blocks[Globals.getTheDisk().blocks[getIndirectLink()].decodeLink(i)].read();
+
+            String buffer = "";
+            for (int c = 0; c < a.length; c++) {
+                buffer += (char) a[c] + "";
+            }
+            System.out.println("" + buffer);
+            returnMe += buffer;
+        }
 
         //if there's a double indirect link...
-//        returnMe += makeString(Globals.getTheDisk().read(getDoubleIndirectLink()));
-
+        for (int i = 0; i <= 6; i += 2) {
+            byte[] a = Globals.getTheDisk().blocks[Globals.getTheDisk().blocks[getDoubleIndirectLink()].decodeLink(i)].read();
+            String buffer = "";
+            for (int c = 0; c < a.length; c++) {
+                buffer += (char) a[c] + "";
+            }
+            System.out.println("" + buffer);
+            returnMe += buffer;
+        }
         return returnMe;
     }
-    
 
     private String makeString(byte[] data) {
         String returnMe = "";
@@ -79,9 +93,8 @@ public class Inode extends Block {
         for (int i = 0; i < data.length; i++) {
             returnMe += (char) data[i];
         }
-        
+
         return returnMe;
     }
 
-    
 }  // Inode

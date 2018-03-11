@@ -13,6 +13,7 @@ public class File {
 
     private final String name;
     private final int inode_number;
+    private Inode inode;
 
     public File(String name, int InodeNumb) {
         this.name = name;
@@ -25,5 +26,13 @@ public class File {
 
     public int getInodeNumber() {
         return inode_number;
+    }
+
+    public Inode getInode() {
+        return inode;
+    }
+
+    public void setInode(Inode inode) {
+        this.inode = inode;
     }
 }
