@@ -14,7 +14,7 @@ public class File {
     private final String name;
     private final int inode_number;
     private Inode inode;
-    private int dataLength; 
+    private int dataLength;
 
     public File(String name, int InodeNumb) {
         this.name = name;

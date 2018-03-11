@@ -9,10 +9,6 @@ public class Inode extends Block {
 
     private int dataLength;
 
-    public int getDataLength() {
-        return dataLength;
-    }
-
     public Inode() {
         super();
     }
@@ -23,6 +19,10 @@ public class Inode extends Block {
 
     public short getSize() {
         return decodeLink(0);
+    }
+
+    public int getDataLength() {
+        return dataLength;
     }
 
     public short getDirectLink() {

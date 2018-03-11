@@ -13,11 +13,6 @@ public class StartHere {
         Globals.init();
         DiskEditor editor = new DiskEditor();
         editor.setVisible(true);
-
-        for (int i = 0; i <= 6; i += 2) {
-            System.out.println(i);
-        }
-
     }
 
     static void playWithStrings() {

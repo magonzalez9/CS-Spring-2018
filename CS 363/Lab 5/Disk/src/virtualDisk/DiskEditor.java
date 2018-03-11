@@ -17,10 +17,13 @@ public class DiskEditor extends javax.swing.JFrame {
 
     FileSystem fileSystem = new FileSystem();
     ArrayList<File> file_list = new ArrayList<File>();
+    ArrayList<Integer> inode_list = new ArrayList<Integer>();
+    File currentFile;
 
     public DiskEditor() {
         initComponents();
         this.setSize(500, 500);
+        setInodeList();
     }
 
     @SuppressWarnings("unchecked")
@@ -124,23 +127,20 @@ public class DiskEditor extends javax.swing.JFrame {
             }
             nodeString += "Select the inode to save your file";
         }
-        String inode = (String) JOptionPane.showInputDialog(
-                new JFrame(),
-                nodeString,
-                "Node number...",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                null,
-                "");
 
         //Set inode number
-        int inodeNumber = Integer.parseInt(inode);
+        int inodeNumber = 0;
+        if (!inode_list.isEmpty()) {
+            inodeNumber = inode_list.get(0);
+            inode_list.remove(0);
+        }
+        System.out.println(inode_list.toString() + "what is left");
 
         // Create file
         File file = new File(filename, inodeNumber);
 
         //Add to our list of files
-        file_list.add(inodeNumber, file);
+        file_list.add(file);
 
         // Get the data from text area
         String data = textArea.getText();
@@ -151,11 +151,13 @@ public class DiskEditor extends javax.swing.JFrame {
         // Display filename on gui menu
         fileNameMenu.setText(filename);
 
+        currentFile = file;
 
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_deleteActionPerformed
 
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
@@ -182,6 +184,7 @@ public class DiskEditor extends javax.swing.JFrame {
             String dataToDisplay = fileSystem.load(file_list.get(inodeNumber));
             textArea.setText(dataToDisplay);
             fileNameMenu.setText(file_list.get(inodeNumber).getName());
+            currentFile = file_list.get(inodeNumber);
             System.out.println("LOADED DATA!: " + dataToDisplay);
         }
 
@@ -189,6 +192,7 @@ public class DiskEditor extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
+        fileSystem.save(currentFile, textArea.getText());
     }//GEN-LAST:event_saveActionPerformed
 
     /**
@@ -224,6 +228,12 @@ public class DiskEditor extends javax.swing.JFrame {
                 new DiskEditor().setVisible(true);
             }
         });
+    }
+
+    public void setInodeList() {
+        inode_list.add(0);
+        inode_list.add(1);
+        inode_list.add(2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

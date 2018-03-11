@@ -24,7 +24,7 @@ public class FileSystem {
 
     public void save(File file, String data) {
         // Begin to add. 
-        Inode theInode = (Inode) theDisk.blocks[inodeFreeList.remove(file.getInodeNumber())];  // grab the first one
+        Inode theInode = (Inode) theDisk.blocks[file.getInodeNumber()];  // grab the first one
         theInode.setSize((short) data.length());
         file.setInode(theInode, data.length());
 
@@ -102,7 +102,7 @@ public class FileSystem {
                 }
             }
         }
-       
+
         // Display the disk
         System.out.println(theDisk);
     }
@@ -110,5 +110,12 @@ public class FileSystem {
     public String load(File file) {
         System.out.println(theDisk);
         return file.getInode().load();
+    }
+    
+    public void delete(File file){
+       Inode theInode = (Inode) theDisk.blocks[file.getInodeNumber()];  // grab the first one
+       blockFreeList.clear();
+       
+    
     }
 }
