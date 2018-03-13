@@ -24,13 +24,15 @@ public class FileSystem {
     }
 
     public void save(File file, String data) {
-        System.out.println(blockFreeList.toString());
         System.out.println("FIRST");
-        System.out.println(inodeFreeList.toString());
+        System.out.println("Block: " + blockFreeList.toString());
+        System.out.println("inodes: " + inodeFreeList.toString());
         // Begin to add. 
-        Inode theInode = (Inode) theDisk.blocks[file.getInodeNumber()];  // grab the first one
+        short inode = inodeFreeList.remove(0);
+        Inode theInode = (Inode) theDisk.blocks[inode];  // grab the first one
+
         theInode.setSize((short) data.length());
-        file.setInode(theInode, data.length());
+        file.setInode(theInode, data.length(), inode);
 
         // Set array
         byte[][] inputData = new byte[30][8];
@@ -55,8 +57,6 @@ public class FileSystem {
         DataBlock aDataBlock = (DataBlock) theDisk.blocks[block_1];
         aDataBlock.write(inputData[0]);
         theInode.setDirectLink(block_1);
-
-        System.out.println("LENGTH!: " + inputData[0].length);
 
         if (data.length() > 8) {
             // Set Indirect Block if character count is greater than 8!
@@ -116,8 +116,10 @@ public class FileSystem {
 
         // Display the disk for testing purposes
         System.out.println(theDisk);
-        System.out.println(blockFreeList.toString());
+        System.out.println("Block: " + blockFreeList.toString());
+        System.out.println("inodes: " + inodeFreeList.toString());
         System.out.println("END");
+        Collections.sort(inodeFreeList);
     }
 
     public void s(File file, String data) {

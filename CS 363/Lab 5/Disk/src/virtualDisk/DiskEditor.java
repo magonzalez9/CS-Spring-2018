@@ -1,7 +1,6 @@
 package virtualDisk;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,9 +18,7 @@ public class DiskEditor extends javax.swing.JFrame {
     public DiskEditor() {
         initComponents();
         this.setSize(500, 500);
-        // set free inode list.
-        setInodeList();
-        
+
         // disable save funtionality as there are no files to open when the program first runs!
         save.setEnabled(false);
 
@@ -83,7 +80,7 @@ public class DiskEditor extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Delete");
 
         delete.setText("Delete File");
         delete.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +121,7 @@ public class DiskEditor extends javax.swing.JFrame {
             int inodeNumber = 0;
 
             // Check to see if the inode list is full 
-            if (!inode_list.isEmpty()) { // inode list is not empty so we can still add files!
+            if (file_list.size() < 3) { // inode list is not empty so we can still add files!
                 String filename = (String) JOptionPane.showInputDialog(
                         new JFrame(),
                         "Enter filename",
@@ -134,12 +131,8 @@ public class DiskEditor extends javax.swing.JFrame {
                         null,
                         "");
 
-                // Get an open INODE number!
-                inodeNumber = inode_list.get(0);
-                inode_list.remove(0);
-
                 // Create file with retrieved indode number
-                File file = new File(filename, inodeNumber);
+                File file = new File(filename);
 
                 //Add to our list of files
                 file_list.add(file);
@@ -203,25 +196,57 @@ public class DiskEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        fileSystem.delete(currentFile);
-        inode_list.add(currentFile.getInodeNumber());
-        Collections.sort(inode_list);
-        System.out.println(inode_list.toString()); 
+        if (file_list.size() < 3) { // inode list is not empty so we can still add files!
+            String listOfFiles = "Current Files in System:\n";
+            // There are existing file(s) lets display them!
+            for (int i = 0; i < file_list.size(); i++) {
+                //Build string for JOption Pane below the shows user the files that are available
+                listOfFiles += i + ". " + file_list.get(i).getName() + "\n";
+            }
+
+            // Prompt user for a filename so we can load
+            listOfFiles += "Enter the filename!";
+            String inodeString = (String) JOptionPane.showInputDialog(
+                    new JFrame(),
+                    listOfFiles,
+                    "DELETE a file...",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    null,
+                    "");
+
+            // Delete the correct file
+            for (int i = 0; i < file_list.size(); i++) {
+                if (inodeString.equals(file_list.get(i).getName())) {
+                    fileSystem.delete(file_list.get(i));
+
+                    file_list.remove(i);
+                    textArea.setText(null);
+                    fileNameMenu.setText("Untitled*");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No records to load!");
+        }
+
+
     }//GEN-LAST:event_deleteActionPerformed
 
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
-        String listOfFiles = "";
 
         // If the list is empty (no files saved yet) let the user know!
         if (file_list.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No records to load!");
         } else {
+            String listOfFiles = "Current Files in System:\n";
             // There are existing file(s) lets display them!
             for (int i = 0; i < file_list.size(); i++) {
                 //Build string for JOption Pane below the shows user the files that are available
-                listOfFiles += "(" + file_list.get(i).getInodeNumber() + ") " + file_list.get(i).getName() + "\n";
+                listOfFiles += i + ". " + file_list.get(i).getName() + "\n";
             }
-            listOfFiles += "Select the number of the file you wish to load";
+
+            // Prompt user for a filename so we can load
+            listOfFiles += "Enter the filename!";
             String inodeString = (String) JOptionPane.showInputDialog(
                     new JFrame(),
                     listOfFiles,
@@ -230,17 +255,18 @@ public class DiskEditor extends javax.swing.JFrame {
                     null,
                     null,
                     "");
+            for (int i = 0; i < file_list.size(); i++) {
+                if (inodeString.equals(file_list.get(i).getName())) {
+                    // Load data into text area!
+                    textArea.setText(fileSystem.load(file_list.get(i)));
 
-            int inodeNumber = Integer.parseInt(inodeString);
+                    // set filename on our lovely option menu
+                    fileNameMenu.setText(file_list.get(i).getName());
 
-            // Load data into text area!
-            textArea.setText(fileSystem.load(file_list.get(inodeNumber)));
-
-            // set filename on our lovely option menu
-            fileNameMenu.setText(file_list.get(inodeNumber).getName());
-
-            // Set the current file so we can later access it!
-            currentFile = file_list.get(inodeNumber);
+                    // Set the current file so we can later access it!
+                    currentFile = file_list.get(i);
+                }
+            }
         }
 
     }//GEN-LAST:event_loadActionPerformed
@@ -248,7 +274,7 @@ public class DiskEditor extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // Save current data into current file
         String data = textArea.getText();
-        
+
         // First make sure that the data length does not exceed the max char limit
         if (data.length() > 168) {
             //Ack! Too many characters!
@@ -294,12 +320,6 @@ public class DiskEditor extends javax.swing.JFrame {
         });
     }
 
-    public void setInodeList() {
-        // First, set the inodes that are free upon running program e.g [0,1,2]
-        inode_list.add(0);
-        inode_list.add(1);
-        inode_list.add(2);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem delete;

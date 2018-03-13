@@ -15,19 +15,20 @@ public class File {
 
     private String name;
 
-    private final int inode_number;
+    private  short inode_number;
     private Inode inode;
     private int dataLength;
-     ArrayList<Short> blockCount = new ArrayList<Short>();
+    ArrayList<Short> blockCount = new ArrayList<Short>();
+    
 
-    public File(String name, int InodeNumb) {
+    public File(String name) {
         this.name = name;
-        this.inode_number = InodeNumb;
     }
 
-    public void setInode(Inode inode, int dataLength) {
+    public void setInode(Inode inode, int dataLength, short inode_number) {
         this.inode = inode;
         inode.setDataLength(dataLength);
+        this.inode_number = inode_number;
     }
 
     public void setName(String name) {
@@ -38,20 +39,20 @@ public class File {
         return name;
     }
 
-    public int getInodeNumber() {
+    public short getInodeNumber() {
         return inode_number;
     }
 
     public Inode getInode() {
         return inode;
     }
-    
-    public void addBlock(short i){
+
+    public void addBlock(short i) {
         blockCount.add(i);
     }
-    
-    public ArrayList<Short> getBlockList(){
-        return blockCount; 
+
+    public ArrayList<Short> getBlockList() {
+        return blockCount;
     }
 
 }

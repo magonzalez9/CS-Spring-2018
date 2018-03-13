@@ -40,7 +40,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="delete">

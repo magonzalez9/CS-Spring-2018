@@ -10,7 +10,8 @@ y <- true_beta_0 + true_beta_1*x_1 + true_error
 hist(y) #plot p(y)
 
 plot(x_1,y, pch=20,col="red") #plot p(x,y)
-mod <- lm(y ~ x_1)
+mod <- lm(y ~ x_1
+          )
 
 # plot the regression model
 plot(mod, pch=20, col="blue")
