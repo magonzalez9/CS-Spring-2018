@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package virtualDisk;
 
 import java.util.ArrayList;
@@ -19,12 +14,16 @@ public class DiskEditor extends javax.swing.JFrame {
     ArrayList<File> file_list = new ArrayList<File>();
     ArrayList<Integer> inode_list = new ArrayList<Integer>();
     File currentFile;
-    
 
     public DiskEditor() {
         initComponents();
         this.setSize(500, 500);
+        // set free inode list.
         setInodeList();
+        
+        // disable save funtionality as there are no files to open when the program first runs!
+        save.setEnabled(false);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -111,74 +110,115 @@ public class DiskEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void saveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsActionPerformed
-        String filename = (String) JOptionPane.showInputDialog(
-                new JFrame(),
-                "Enter filename",
-                "Save as...",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                null,
-                "");
-        
-        String nodeString = "";
-        
-        if (file_list.isEmpty()) {
-            nodeString = "Open locations: 0,1,2";
-        } else {
-            for (int i = 0; i < file_list.size(); i++) {
-                //Build string for JOption Pane below
-                nodeString += "Location full: " + file_list.get(i).getInodeNumber() + "\n";
-            }
-            nodeString += "Select the inode to save your file";
-        }
-        
-          // Get the data from text area
+        // Get text from text area
         String data = textArea.getText();
-        if (data.length() > 168){
-            //Alert max charecters 
-        }
-        //Set inode number
-        int inodeNumber = 0;
-        if (!inode_list.isEmpty()) {
-            inodeNumber = inode_list.get(0);
-            inode_list.remove(0);
-        }
 
-        // Create file
-        File file = new File(filename, inodeNumber);
+        // First check that the user has not exceeded the character limit... if so do not save and spit out a message
+        if (data.length() > 168) {
+            //ALERT! user has exceeded max charecters available
+            JOptionPane.showMessageDialog(null, "Max character limit reached: " + data.length() + "/168");
+        } else {
+            // User has less than 168 characters in text area! Lets begin to save...
+            // Set starting inode... (only gets set once)
+            int inodeNumber = 0;
 
-        //Add to our list of files
-        file_list.add(file);
+            // Check to see if the inode list is full 
+            if (!inode_list.isEmpty()) { // inode list is not empty so we can still add files!
+                String filename = (String) JOptionPane.showInputDialog(
+                        new JFrame(),
+                        "Enter filename",
+                        "Save as...",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
 
-      
+                // Get an open INODE number!
+                inodeNumber = inode_list.get(0);
+                inode_list.remove(0);
 
-        // Save the data!
-        fileSystem.save(file, data);
+                // Create file with retrieved indode number
+                File file = new File(filename, inodeNumber);
 
-        // Display filename on gui menu
-        fileNameMenu.setText(filename);
-        
-        // keep track of the current file we are working on. 
-        currentFile = file;
+                //Add to our list of files
+                file_list.add(file);
+
+                // Save the data!
+                fileSystem.save(file, data);
+
+                // Display filename on gui menu
+                fileNameMenu.setText(filename);
+
+                // keep track of the current file we are working on. 
+                currentFile = file;
+
+                save.setEnabled(true);
+            } else { // Ack! The list if full, lets ask the user they would like to overite a file!
+                String listOfFiles = "";
+                for (int i = 0; i < file_list.size(); i++) {
+                    //Lets generate the list of the files that are currently saved. 
+                    listOfFiles += "(" + file_list.get(i).getInodeNumber() + ") " + file_list.get(i).getName() + "\n";
+                }
+                listOfFiles += "Warning: No more inodes left! Select the inode you wish to OVERWRITE!";
+
+                // Get the inode number that the user chose to overite!
+                String inodeToReplace = (String) JOptionPane.showInputDialog(
+                        new JFrame(),
+                        listOfFiles,
+                        "Overwrite a file",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+                // Set the new file name for the file we are overwriting
+                String overite_filename = (String) JOptionPane.showInputDialog(
+                        new JFrame(),
+                        "Enter new filename",
+                        "Save as...",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+
+                // parse the inode string so we can get the right file!
+                int inodeNumbtoReplace = Integer.parseInt(inodeToReplace);
+
+                // Save the data
+                fileSystem.save(file_list.get(inodeNumbtoReplace), data);
+
+                // set the new file name in our file object!
+                file_list.get(inodeNumbtoReplace).setName(overite_filename);
+
+                // Display filename on gui menu
+                fileNameMenu.setText(overite_filename);
+
+                // Set the current file so we can later access it!
+                currentFile = file_list.get(inodeNumbtoReplace);
+
+            } // End of else checking for existing files
+
+        } // End of else checking for max character length
 
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        // TODO add your handling code here:
 
     }//GEN-LAST:event_deleteActionPerformed
 
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
         String listOfFiles = "";
+
+        // If the list is empty (no files saved yet) let the user know!
         if (file_list.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No records to load!");
         } else {
+            // There are existing file(s) lets display them!
             for (int i = 0; i < file_list.size(); i++) {
-                //Build string for JOption Pane below
+                //Build string for JOption Pane below the shows user the files that are available
                 listOfFiles += "(" + file_list.get(i).getInodeNumber() + ") " + file_list.get(i).getName() + "\n";
             }
             listOfFiles += "Select the number of the file you wish to load";
-            String fileNumber = (String) JOptionPane.showInputDialog(
+            String inodeString = (String) JOptionPane.showInputDialog(
                     new JFrame(),
                     listOfFiles,
                     "Load file...",
@@ -187,22 +227,32 @@ public class DiskEditor extends javax.swing.JFrame {
                     null,
                     "");
 
-            int inodeNumber = Integer.parseInt(fileNumber);
+            int inodeNumber = Integer.parseInt(inodeString);
 
-            String dataToDisplay = fileSystem.load(file_list.get(inodeNumber));
-            textArea.setText(dataToDisplay);
+            // Load data into text area!
+            textArea.setText(fileSystem.load(file_list.get(inodeNumber)));
+
+            // set filename on our lovely option menu
             fileNameMenu.setText(file_list.get(inodeNumber).getName());
+
+            // Set the current file so we can later access it!
             currentFile = file_list.get(inodeNumber);
-            
-            // Display the data in the output window
-            System.out.println("LOADED DATA!: " + dataToDisplay);
         }
 
     }//GEN-LAST:event_loadActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // TODO add your handling code here:
-        fileSystem.save(currentFile, textArea.getText());
+        // Save current data into current file
+        String data = textArea.getText();
+        
+        // First make sure that the data length does not exceed the max char limit
+        if (data.length() > 168) {
+            //Ack! Too many characters!
+            JOptionPane.showMessageDialog(null, "Max character limit reached: " + data.length() + "/168");
+        } else {
+            // We good on characters lets save the data into current file
+            fileSystem.save(currentFile, textArea.getText());
+        }
     }//GEN-LAST:event_saveActionPerformed
 
     /**
@@ -241,6 +291,7 @@ public class DiskEditor extends javax.swing.JFrame {
     }
 
     public void setInodeList() {
+        // First, set the inodes that are free upon running program e.g [0,1,2]
         inode_list.add(0);
         inode_list.add(1);
         inode_list.add(2);

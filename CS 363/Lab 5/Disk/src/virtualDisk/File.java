@@ -11,7 +11,8 @@ package virtualDisk;
  */
 public class File {
 
-    private final String name;
+    private String name;
+
     private final int inode_number;
     private Inode inode;
     private int dataLength;
@@ -19,6 +20,15 @@ public class File {
     public File(String name, int InodeNumb) {
         this.name = name;
         this.inode_number = InodeNumb;
+    }
+
+    public void setInode(Inode inode, int dataLength) {
+        this.inode = inode;
+        inode.setDataLength(dataLength);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
@@ -33,8 +43,4 @@ public class File {
         return inode;
     }
 
-    public void setInode(Inode inode, int dataLength) {
-        this.inode = inode;
-        inode.setDataLength(dataLength);
-    }
 }

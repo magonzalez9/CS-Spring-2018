@@ -67,13 +67,12 @@ public class Inode extends Block {
     } // toString()
 
     String load() {
-        // always direct... 
+
         String returnMe = "";
 
         returnMe += makeString(Globals.getTheDisk().read(getDirectLink()));  // read the direct link
 
         if (getDataLength() > 8) {
-
             //if there's an indirect link...
             for (int i = 0; i <= 6; i += 2) {
                 byte[] a = Globals.getTheDisk().blocks[Globals.getTheDisk().blocks[getIndirectLink()].decodeLink(i)].read();

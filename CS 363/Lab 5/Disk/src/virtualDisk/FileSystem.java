@@ -54,8 +54,7 @@ public class FileSystem {
         System.out.println("LENGTH!: " + inputData[0].length);
 
         if (data.length() > 8) {
-
-            // Set Indirect Block
+            // Set Indirect Block if character count is greater than 8!
             short indirect_block = blockFreeList.remove(0);
             DataBlock id = (DataBlock) theDisk.blocks[indirect_block];
             theInode.setIndirectLink(indirect_block);
@@ -76,7 +75,7 @@ public class FileSystem {
         }
 
         if (data.length() > 40) {
-            // Create double indirect block
+            // Create double indirect block if character length is greater than 40!
             short double_indirectBlock = blockFreeList.remove(0);
             DataBlock double_id = (DataBlock) theDisk.blocks[double_indirectBlock];
             theInode.setDoubleIndirectLink(double_indirectBlock);
@@ -89,7 +88,7 @@ public class FileSystem {
 
                 for (int j = 0; j <= 6; j += 2) {
                     if (inputData[db_count][0] != 0) {
-                        // Add the actual data
+                        // Create the actual data blocks and put data in them!
                         short double_dataBlock = blockFreeList.remove(0);
                         DataBlock fDataBlock = (DataBlock) theDisk.blocks[double_dataBlock];
                         finalDiBlock.setLink(j, double_dataBlock);
@@ -103,7 +102,7 @@ public class FileSystem {
             }
         }
 
-        // Display the disk
+        // Display the disk for testing purposes
         System.out.println(theDisk);
     }
 
@@ -111,11 +110,9 @@ public class FileSystem {
         System.out.println(theDisk);
         return file.getInode().load();
     }
-    
-    public void delete(File file){
-       Inode theInode = (Inode) theDisk.blocks[file.getInodeNumber()];  // grab the first one
 
-       
-    
+    public void delete(File file) {
+        Inode theInode = (Inode) theDisk.blocks[file.getInodeNumber()];
+
     }
 }
