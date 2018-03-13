@@ -19,6 +19,7 @@ public class DiskEditor extends javax.swing.JFrame {
     ArrayList<File> file_list = new ArrayList<File>();
     ArrayList<Integer> inode_list = new ArrayList<Integer>();
     File currentFile;
+    
 
     public DiskEditor() {
         initComponents();
@@ -94,6 +95,8 @@ public class DiskEditor extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        fileNameMenu.setBackground(new java.awt.Color(51, 51, 255));
+        fileNameMenu.setBorder(new javax.swing.border.MatteBorder(null));
         fileNameMenu.setForeground(new java.awt.Color(0, 0, 255));
         fileNameMenu.setText("Untitled*");
         jMenuBar1.add(fileNameMenu);
@@ -116,8 +119,9 @@ public class DiskEditor extends javax.swing.JFrame {
                 null,
                 null,
                 "");
+        
         String nodeString = "";
-
+        
         if (file_list.isEmpty()) {
             nodeString = "Open locations: 0,1,2";
         } else {
@@ -127,14 +131,18 @@ public class DiskEditor extends javax.swing.JFrame {
             }
             nodeString += "Select the inode to save your file";
         }
-
+        
+          // Get the data from text area
+        String data = textArea.getText();
+        if (data.length() > 168){
+            //Alert max charecters 
+        }
         //Set inode number
         int inodeNumber = 0;
         if (!inode_list.isEmpty()) {
             inodeNumber = inode_list.get(0);
             inode_list.remove(0);
         }
-        System.out.println(inode_list.toString() + "what is left");
 
         // Create file
         File file = new File(filename, inodeNumber);
@@ -142,22 +150,22 @@ public class DiskEditor extends javax.swing.JFrame {
         //Add to our list of files
         file_list.add(file);
 
-        // Get the data from text area
-        String data = textArea.getText();
+      
 
         // Save the data!
         fileSystem.save(file, data);
 
         // Display filename on gui menu
         fileNameMenu.setText(filename);
-
+        
+        // keep track of the current file we are working on. 
         currentFile = file;
 
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_deleteActionPerformed
 
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
@@ -185,6 +193,8 @@ public class DiskEditor extends javax.swing.JFrame {
             textArea.setText(dataToDisplay);
             fileNameMenu.setText(file_list.get(inodeNumber).getName());
             currentFile = file_list.get(inodeNumber);
+            
+            // Display the data in the output window
             System.out.println("LOADED DATA!: " + dataToDisplay);
         }
 

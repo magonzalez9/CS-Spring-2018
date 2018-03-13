@@ -114,7 +114,7 @@ public class FileSystem {
     
     public void delete(File file){
        Inode theInode = (Inode) theDisk.blocks[file.getInodeNumber()];  // grab the first one
-       blockFreeList.clear();
+
        
     
     }
