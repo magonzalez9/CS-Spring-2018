@@ -5,6 +5,8 @@
  */
 package virtualDisk;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author marco
@@ -16,6 +18,7 @@ public class File {
     private final int inode_number;
     private Inode inode;
     private int dataLength;
+     ArrayList<Short> blockCount = new ArrayList<Short>();
 
     public File(String name, int InodeNumb) {
         this.name = name;
@@ -41,6 +44,14 @@ public class File {
 
     public Inode getInode() {
         return inode;
+    }
+    
+    public void addBlock(short i){
+        blockCount.add(i);
+    }
+    
+    public ArrayList<Short> getBlockList(){
+        return blockCount; 
     }
 
 }

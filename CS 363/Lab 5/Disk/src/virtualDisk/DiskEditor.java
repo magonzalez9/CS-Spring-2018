@@ -1,6 +1,7 @@
 package virtualDisk;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -202,7 +203,10 @@ public class DiskEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-
+        fileSystem.delete(currentFile);
+        inode_list.add(currentFile.getInodeNumber());
+        Collections.sort(inode_list);
+        System.out.println(inode_list.toString()); 
     }//GEN-LAST:event_deleteActionPerformed
 
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
