@@ -3,8 +3,6 @@
  Saves and loads data (direct only)
  */
 package virtualDisk;
-
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**

@@ -153,41 +153,7 @@ public class DiskEditor extends javax.swing.JFrame {
                     //Lets generate the list of the files that are currently saved. 
                     listOfFiles += "(" + file_list.get(i).getInodeNumber() + ") " + file_list.get(i).getName() + "\n";
                 }
-                listOfFiles += "Warning: No more inodes left! Select the inode you wish to OVERWRITE!";
-
-                // Get the inode number that the user chose to overite!
-                String inodeToReplace = (String) JOptionPane.showInputDialog(
-                        new JFrame(),
-                        listOfFiles,
-                        "Overwrite a file",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        null,
-                        "");
-                // Set the new file name for the file we are overwriting
-                String overite_filename = (String) JOptionPane.showInputDialog(
-                        new JFrame(),
-                        "Enter new filename",
-                        "Save as...",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        null,
-                        "");
-
-                // parse the inode string so we can get the right file!
-                int inodeNumbtoReplace = Integer.parseInt(inodeToReplace);
-
-                // Save the data
-                fileSystem.save(file_list.get(inodeNumbtoReplace), data);
-
-                // set the new file name in our file object!
-                file_list.get(inodeNumbtoReplace).setName(overite_filename);
-
-                // Display filename on gui menu
-                fileNameMenu.setText(overite_filename);
-
-                // Set the current file so we can later access it!
-                currentFile = file_list.get(inodeNumbtoReplace);
+                JOptionPane.showMessageDialog(null, "No records to load! Please delete a file first.");
 
             } // End of else checking for existing files
 
@@ -196,7 +162,7 @@ public class DiskEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        if (file_list.size() < 3) { // inode list is not empty so we can still add files!
+      
             String listOfFiles = "Current Files in System:\n";
             // There are existing file(s) lets display them!
             for (int i = 0; i < file_list.size(); i++) {
@@ -225,9 +191,7 @@ public class DiskEditor extends javax.swing.JFrame {
                     fileNameMenu.setText("Untitled*");
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No records to load!");
-        }
+        
 
 
     }//GEN-LAST:event_deleteActionPerformed

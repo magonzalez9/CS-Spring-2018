@@ -9,20 +9,24 @@ true_beta_1 <- 8.2
 y <- true_beta_0 + true_beta_1*x_1 + true_error
 hist(y) #plot p(y)
 
+# a. Build a regression model
 plot(x_1,y, pch=20,col="red") #plot p(x,y)
-mod <- lm(y ~ x_1
-          )
-
-# plot the regression model
-plot(mod, pch=20, col="blue")
+mod <- lm(y ~ x_1)
 
 # create new
-x_2 <- rnorm(8000,2,4)
+x_2 <- rgamma(1000,2,4)
 true_gamma <- -8.1
 
 y2 <- true_beta_0 + true_beta_1*x_1 + true_gamma + x_2 * true_error
+
 mod2 <- lm(y2 ~ x_2)
-plot(mod2, pch=20, col="green")
+mod3 <- lm(y2 ~ x_1)
+mod4 <- lm(y2 ~ x_2+x_1)
+
+for (i in 1000:10000) {
+
+}
+
 
 
 
