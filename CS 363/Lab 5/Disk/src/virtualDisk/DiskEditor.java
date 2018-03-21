@@ -108,6 +108,7 @@ public class DiskEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void saveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsActionPerformed
+
         // Get text from text area
         String data = textArea.getText();
 
@@ -119,79 +120,84 @@ public class DiskEditor extends javax.swing.JFrame {
             // User has less than 168 characters in text area! Lets begin to save...
             // Set starting inode... (only gets set once)
             int inodeNumber = 0;
+            double l = data.length() / 8;
 
-            // Check to see if the inode list is full 
-            if (file_list.size() < 3) { // inode list is not empty so we can still add files!
-                String filename = (String) JOptionPane.showInputDialog(
-                        new JFrame(),
-                        "Enter filename",
-                        "Save as...",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        null,
-                        "");
+            if (l > fileSystem.blockFreeList.size()) {
+                JOptionPane.showMessageDialog(null, "Blocklist is full");
+            } else {
 
-                // Create file with retrieved indode number
-                File file = new File(filename);
+                // Check to see if the inode list is full 
+                if (file_list.size() < 3) { // inode list is not empty so we can still add files!
+                    String filename = (String) JOptionPane.showInputDialog(
+                            new JFrame(),
+                            "Enter filename",
+                            "Save as...",
+                            JOptionPane.PLAIN_MESSAGE,
+                            null,
+                            null,
+                            "");
 
-                //Add to our list of files
-                file_list.add(file);
+                    // Create file with retrieved indode number
+                    File file = new File(filename);
 
-                // Save the data!
-                fileSystem.save(file, data);
+                    //Add to our list of files
+                    file_list.add(file);
 
-                // Display filename on gui menu
-                fileNameMenu.setText(filename);
+                    // Save the data!
+                    fileSystem.save(file, data);
 
-                // keep track of the current file we are working on. 
-                currentFile = file;
+                    // Display filename on gui menu
+                    fileNameMenu.setText(filename);
 
-                save.setEnabled(true);
-            } else { // Ack! The list if full, lets ask the user they would like to overite a file!
-                String listOfFiles = "";
-                for (int i = 0; i < file_list.size(); i++) {
-                    //Lets generate the list of the files that are currently saved. 
-                    listOfFiles += "(" + file_list.get(i).getInodeNumber() + ") " + file_list.get(i).getName() + "\n";
-                }
-                JOptionPane.showMessageDialog(null, "No records to load! Please delete a file first.");
+                    // keep track of the current file we are working on. 
+                    currentFile = file;
 
-            } // End of else checking for existing files
+                    save.setEnabled(true);
+                } else { // Ack! The list if full, lets ask the user they would like to overite a file!
+                    String listOfFiles = "";
+                    for (int i = 0; i < file_list.size(); i++) {
+                        //Lets generate the list of the files that are currently saved. 
+                        listOfFiles += "(" + file_list.get(i).getInodeNumber() + ") " + file_list.get(i).getName() + "\n";
+                    }
+                    JOptionPane.showMessageDialog(null, "No records to load! Please delete a file first.");
+
+                } // End of else checking for existing files
+            }
 
         } // End of else checking for max character length
 
     }//GEN-LAST:event_saveAsActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-      
-            String listOfFiles = "Current Files in System:\n";
-            // There are existing file(s) lets display them!
-            for (int i = 0; i < file_list.size(); i++) {
-                //Build string for JOption Pane below the shows user the files that are available
-                listOfFiles += i + ". " + file_list.get(i).getName() + "\n";
+
+        String listOfFiles = "Current Files in System:\n";
+        // There are existing file(s) lets display them!
+        for (int i = 0; i < file_list.size(); i++) {
+            //Build string for JOption Pane below the shows user the files that are available
+            listOfFiles += i + ". " + file_list.get(i).getName() + "\n";
+        }
+
+        // Prompt user for a filename so we can load
+        listOfFiles += "Enter the filename!";
+        String inodeString = (String) JOptionPane.showInputDialog(
+                new JFrame(),
+                listOfFiles,
+                "DELETE a file...",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                "");
+
+        // Delete the correct file
+        for (int i = 0; i < file_list.size(); i++) {
+            if (inodeString.equals(file_list.get(i).getName())) {
+                fileSystem.delete(file_list.get(i));
+
+                file_list.remove(i);
+                textArea.setText(null);
+                fileNameMenu.setText("Untitled*");
             }
-
-            // Prompt user for a filename so we can load
-            listOfFiles += "Enter the filename!";
-            String inodeString = (String) JOptionPane.showInputDialog(
-                    new JFrame(),
-                    listOfFiles,
-                    "DELETE a file...",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    null,
-                    "");
-
-            // Delete the correct file
-            for (int i = 0; i < file_list.size(); i++) {
-                if (inodeString.equals(file_list.get(i).getName())) {
-                    fileSystem.delete(file_list.get(i));
-
-                    file_list.remove(i);
-                    textArea.setText(null);
-                    fileNameMenu.setText("Untitled*");
-                }
-            }
-        
+        }
 
 
     }//GEN-LAST:event_deleteActionPerformed
