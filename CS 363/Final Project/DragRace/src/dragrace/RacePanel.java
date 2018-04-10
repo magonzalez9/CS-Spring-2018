@@ -5,9 +5,10 @@
  */
 package dragrace;
 
+import static dragrace.Controller.column;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,17 +20,37 @@ public class RacePanel extends javax.swing.JPanel {
         initComponents();
         setLayout(null);
         setVisible(true);
-        setPreferredSize(new Dimension(2000, 2000));
+        setSize(500, 500);
+
+        // set Controller
+        Controller c = new Controller(this);
     }
 
-    public void paintComponect(Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
         if (g == null) {
             return;
         }
 
         super.paintComponent(g);
-        g.setColor(Color.RED);
-        g.fillOval(80, 30, 50, 90);
+        ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("images/car1.png")).getImage());
+
+        g.drawImage(image.getImage(), column, 195, 60, 30, null);
+
+        ImageIcon image2 = new ImageIcon(new ImageIcon(getClass().getResource("images/car3.png")).getImage());
+
+        g.drawImage(image2.getImage(), column, 90, 60, 30, null);
+
+        ImageIcon image3 = new ImageIcon(new ImageIcon(getClass().getResource("images/car6.png")).getImage());
+
+        g.drawImage(image3.getImage(), column, 260, 60, 30, null);
+
+        g.setColor(Color.WHITE);
+        
+        System.out.println(column);
+        if (column == 301) {
+            toggle(); 
+        }
 
     }
 
@@ -46,7 +67,11 @@ public class RacePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     void go() {
+        Controller.move();
+    }
 
+    void toggle() {
+        Controller.toggleRunning();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

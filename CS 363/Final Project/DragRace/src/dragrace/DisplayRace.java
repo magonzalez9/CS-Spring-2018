@@ -15,7 +15,7 @@ public class DisplayRace extends javax.swing.JFrame {
 
     public DisplayRace() {
         initComponents();
-        this.setBounds(300, 400, 400, 356);
+        this.setBounds(500, 300, 1200, 350);
         rPanel = new RacePanel();
         add(new RacePanel());
         setVisible(true);
@@ -75,7 +75,10 @@ public class DisplayRace extends javax.swing.JFrame {
         repaint();
     }
 
+    void toggle() {
+        rPanel.toggle();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }
