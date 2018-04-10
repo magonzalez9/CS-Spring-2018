@@ -48,7 +48,7 @@ public class RacePanel extends javax.swing.JPanel {
         g.setColor(Color.WHITE);
         
         System.out.println(column);
-        if (column == 301) {
+        if (column >= 1000) {
             toggle(); 
         }
 
