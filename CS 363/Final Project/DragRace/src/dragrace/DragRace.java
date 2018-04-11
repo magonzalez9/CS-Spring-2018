@@ -15,26 +15,36 @@ public class DragRace {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        RaceFrame r = new RaceFrame();
-        r.setVisible(true);
+//        RaceFrame r = new RaceFrame();
+//        r.setVisible(true);
 
-        // set things
-        double top_speed = 100;
-        double track_distance = 2;
-
-        //current vars
-        double acceleration = 2;
-        double speed = 0;
-        double distance = 0;
-
-//        for (int i = 0; i < 60; i++) { // 60 seconds
-//            if (speed != top_speed) {
-//                speed += acceleration; 
+//         //set things
+//        double top_speed = 100;
+//        double track_distance = 2;
+//
+//        //current vars
+//        double acceleration = 60 / 8;
+//        double current_speed = 0;
+//        double distance_traveled = 0;
+//        
+//        System.out.println(acceleration);
+//
+//        for (double i = 1; i < 60; i++) { // 60 seconds
+//            if (!(current_speed >= top_speed)) {
+//                current_speed += acceleration;
+//            } else {
+//                current_speed = top_speed;
 //            }
-//            distance = speed * i;  // meters
-//            
-//            System.out.println("Distance covered at second " + i +": "+ distance);
+//            distance_traveled += (current_speed * 0.44704);  // meters per second
+//
+//            System.out.println("Speed after second " + i + ": " + current_speed);
+//            System.out.println("Distance traveled " + i + ": " + distance_traveled);
 //        }
+//        
+        // set the object to check shit
+        RaceCar car1 = new RaceCar(1, 10,10,10,10);
+        
+        System.out.println(car1.toString());
     }
 
 }
