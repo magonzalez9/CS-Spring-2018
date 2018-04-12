@@ -47,6 +47,7 @@ public class RacePanel extends javax.swing.JPanel {
 
         g.setColor(Color.WHITE);
 
+        // if cars reach dis distance then stop 
         if (column >= 1000) {
             toggle(); 
         }

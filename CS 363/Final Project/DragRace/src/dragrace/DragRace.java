@@ -5,6 +5,9 @@
  */
 package dragrace;
 
+import java.io.File;
+import java.net.URL;
+
 /**
  *
  * @author marco
@@ -17,6 +20,11 @@ public class DragRace {
     public static void main(String[] args) {
         RaceFrame r = new RaceFrame();
         r.setVisible(true);
+
+        CarFreeList list = new CarFreeList();
+        File directory = new File("./");
+        System.out.println(directory.getAbsolutePath());
+
 
 //         //set things
 //        double top_speed = 100;
@@ -42,8 +50,8 @@ public class DragRace {
 //        }
 //        
         // set the object to check shit
-        RaceCar car1 = new RaceCar(1, 10,10,10,10);
-        
+        RaceCar car1 = new RaceCar(1, 10, 10, 10, 10);
+
         System.out.println(car1.toString());
     }
 

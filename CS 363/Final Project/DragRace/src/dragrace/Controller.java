@@ -52,4 +52,16 @@ public class Controller extends JComponent {
         }
         //column = 3;
     }
+
+    public double milesToMeters(double miles) {
+        return miles * 0.000621371192;
+    }
+
+    public double metersToMiles(double meters) {
+        return meters * 1609.344;
+    }
+
+    public double mphToMetersPerHour(double mph) {
+        return mph * 0.44704;
+    }
 }
