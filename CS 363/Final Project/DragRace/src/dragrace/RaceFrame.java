@@ -35,6 +35,7 @@ public class RaceFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -46,11 +47,11 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(250, 160, 110, 40);
+        jButton1.setBounds(250, 280, 110, 40);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(250, 50, 120, 27);
+        jComboBox1.setBounds(250, 50, 120, 22);
         getContentPane().add(jSlider1);
         jSlider1.setBounds(0, 40, 190, 20);
 
@@ -61,21 +62,21 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(20, 310, 130, 40);
+        jButton2.setBounds(250, 110, 110, 40);
 
         jLabel1.setText("Car List");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(290, 30, 60, 16);
         getContentPane().add(jSlider2);
-        jSlider2.setBounds(0, 80, 190, 29);
+        jSlider2.setBounds(0, 80, 190, 26);
         getContentPane().add(jSlider3);
-        jSlider3.setBounds(0, 130, 190, 29);
+        jSlider3.setBounds(0, 130, 190, 26);
         getContentPane().add(jSlider4);
-        jSlider4.setBounds(0, 180, 190, 29);
+        jSlider4.setBounds(0, 180, 190, 26);
 
         jLabel2.setText("Engine Size");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 230, 110, 20);
+        jLabel2.setBounds(40, 230, 110, 20);
 
         jRadioButton1.setText("V4");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,11 +85,20 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(10, 250, 120, 23);
+        jRadioButton1.setBounds(10, 250, 120, 25);
 
-        jRadioButton2.setText("jRadioButton2");
+        jRadioButton2.setText("V6");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(20, 280, 120, 23);
+        jRadioButton2.setBounds(10, 280, 107, 25);
+
+        jRadioButton3.setText("V8");
+        getContentPane().add(jRadioButton3);
+        jRadioButton3.setBounds(10, 310, 107, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,6 +115,10 @@ public class RaceFrame extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,6 +166,7 @@ public class RaceFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JSlider jSlider3;
