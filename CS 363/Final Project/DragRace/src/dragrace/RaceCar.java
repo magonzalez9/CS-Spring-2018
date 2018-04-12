@@ -13,7 +13,7 @@ public class RaceCar {
     private final double nitro;
     private final double fuel;
     private final double engine_size;
-    private double distance;
+    private double distance_traveled = 1;
     private double current_speed;
 
     public RaceCar(int speed, int acceleration, double nitro, double fuel, double engine_size) {

@@ -22,10 +22,10 @@ public class Controller extends JComponent {
                 while (true) {
                     if (running) {
                         panel.repaint();
-                        column += 10; // this will be the speed 
+                        column += 10; // this will be the distance covered determined by our stats 
 
                     }
-                    thread.sleep(100);
+                    thread.sleep(60);
                     if (column == 100) {
                         toggleRunning();
                     }

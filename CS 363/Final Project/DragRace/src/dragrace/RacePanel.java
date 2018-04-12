@@ -46,11 +46,11 @@ public class RacePanel extends javax.swing.JPanel {
         g.drawImage(image3.getImage(), column, 260, 60, 30, null);
 
         g.setColor(Color.WHITE);
-        
-        System.out.println(column);
+
         if (column >= 1000) {
             toggle(); 
         }
+
 
     }
 
@@ -72,6 +72,7 @@ public class RacePanel extends javax.swing.JPanel {
 
     void toggle() {
         Controller.toggleRunning();
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

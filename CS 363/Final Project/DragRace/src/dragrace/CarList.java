@@ -5,10 +5,16 @@
  */
 package dragrace;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author marco
  */
-public class CarList {
+public class CarList extends ArrayList<RaceCar> {
+
+    public CarList(RaceCar race_car) {
+        add(race_car);
+    }
     
 }
