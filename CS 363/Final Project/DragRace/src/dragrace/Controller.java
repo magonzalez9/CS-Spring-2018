@@ -23,7 +23,6 @@ public class Controller extends JComponent {
                     if (running) {
                         panel.repaint();
                         column += 10; // this will be the distance covered determined by our stats 
-
                     }
                     thread.sleep(60);
                     if (column == 100) {

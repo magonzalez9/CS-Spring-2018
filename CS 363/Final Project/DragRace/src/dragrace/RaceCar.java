@@ -6,6 +6,8 @@
  */
 package dragrace;
 
+import javax.swing.ImageIcon;
+
 public class RaceCar {
 
     // Car statistics
@@ -16,6 +18,7 @@ public class RaceCar {
     private final double nitro;
     private final double fuel;
     private final double engine_size;
+    private ImageIcon image; 
 
     // Stats while moving
     private double distance_traveled = 1;
@@ -35,6 +38,14 @@ public class RaceCar {
 
     public void useNitro() {
 
+    }
+    
+    public void setImage (ImageIcon i ){
+        this.image = i;
+    }
+    
+    public ImageIcon getImage(){
+        return this.image; 
     }
 
     public String toString() {

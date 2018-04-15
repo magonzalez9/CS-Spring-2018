@@ -22,8 +22,6 @@ public class DragRace {
         r.setVisible(true);
 
         CarFreeList list = new CarFreeList();
-        File directory = new File("./");
-        System.out.println(directory.getAbsolutePath());
 
 
 //         //set things

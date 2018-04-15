@@ -7,7 +7,7 @@ public class RaceFrame extends javax.swing.JFrame {
     public RaceFrame() {
         initComponents();
         setVisible(true);
-        setSize(500, 300);
+        setSize(450, 400);
         displayRace = new DisplayRace();
 
     }

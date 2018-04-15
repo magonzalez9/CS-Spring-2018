@@ -33,6 +33,7 @@ public class RacePanel extends javax.swing.JPanel {
         }
 
         super.paintComponent(g);
+        // foreach image in imagelist, g.drawImage(ImageList.get(i).getImage(), raceCarColumn, 
         ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("images/car1.png")).getImage());
 
         g.drawImage(image.getImage(), column, 195, 60, 30, null);

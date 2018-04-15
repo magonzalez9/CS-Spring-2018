@@ -2,6 +2,7 @@ package dragrace;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * - List of available images (image names e.g. "car1.png")
@@ -19,6 +20,7 @@ public class CarFreeList extends ArrayList<String> {
                 add(listOfFile.getName());
             }
         }
-        
+        Collections.shuffle(this);
+        System.out.println(toString());
     }
 }
