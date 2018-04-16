@@ -21,9 +21,6 @@ public class DragRace {
         RaceFrame r = new RaceFrame();
         r.setVisible(true);
 
-        CarFreeList list = new CarFreeList();
-
-
 //         //set things
 //        double top_speed = 100;
 //        double track_distance = 2;
@@ -48,9 +45,8 @@ public class DragRace {
 //        }
 //        
         // set the object to check shit
-        RaceCar car1 = new RaceCar(1, 10, 10, 10, 10);
-
-        System.out.println(car1.toString());
+        //  RaceCar car1 = new RaceCar(1, 10, 10, 10, 10);
+        //   System.out.println(car1.toString());
     }
 
 }

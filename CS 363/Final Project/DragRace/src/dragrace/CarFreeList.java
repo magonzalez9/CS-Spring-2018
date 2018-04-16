@@ -21,6 +21,5 @@ public class CarFreeList extends ArrayList<String> {
             }
         }
         Collections.shuffle(this);
-        System.out.println(toString());
     }
 }

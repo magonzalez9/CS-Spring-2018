@@ -11,7 +11,7 @@ public class Controller extends JComponent {
     static boolean running = true;
 
     Controller(JPanel panel) {
-        this.panel = panel;
+        Controller.panel = panel;
     }
 
     static Thread thread = new Thread() {

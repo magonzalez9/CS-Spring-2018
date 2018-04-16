@@ -1,5 +1,8 @@
 package dragrace;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 public class DisplayRace extends javax.swing.JFrame {
 
     RacePanel rPanel;
@@ -68,6 +71,12 @@ public class DisplayRace extends javax.swing.JFrame {
 
     void toggle() {
         rPanel.toggle();
+    }
+    
+    void addCar(RaceCar car){
+        rPanel.addCar(car); 
+        repaint();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
