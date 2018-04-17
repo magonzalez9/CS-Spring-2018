@@ -8,7 +8,7 @@ package dragrace;
 import static dragrace.Controller.column;
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,10 +39,10 @@ public class RacePanel extends javax.swing.JPanel {
 
         super.paintComponent(g);
 
-        //draw
+        // Draw the car as the user adds them
         drawCar(g);
-
         g.setColor(Color.WHITE);
+
         // if cars reach dis distance then stop 
         if (column >= 1000) {
             toggle();
@@ -53,23 +53,23 @@ public class RacePanel extends javax.swing.JPanel {
     // Draw cars as the user adds them
     void drawCar(Graphics g) {
         if (car_list.size() >= 1) {
-            g.drawImage(car_list.get(0).drawImage().getImage(), column, 20, 60, 30, null);
+            g.drawImage(car_list.get(0).drawImage().getImage(), (int) car_list.get(0).distanceTraveled(), 20, 60, 30, null);
         }
         if (car_list.size() >= 2) {
 
-            g.drawImage(car_list.get(1).drawImage().getImage(), column, 80, 60, 30, null);
+            g.drawImage(car_list.get(1).drawImage().getImage(), (int) car_list.get(1).distanceTraveled(), 80, 60, 30, null);
         }
         if (car_list.size() >= 3) {
 
-            g.drawImage(car_list.get(2).drawImage().getImage(), column, 140, 60, 30, null);
+            g.drawImage(car_list.get(2).drawImage().getImage(), (int) car_list.get(2).distanceTraveled(), 140, 60, 30, null);
         }
         if (car_list.size() >= 4) {
 
-            g.drawImage(car_list.get(3).drawImage().getImage(), column, 200, 60, 30, null);
+            g.drawImage(car_list.get(3).drawImage().getImage(), (int) car_list.get(3).distanceTraveled(), 200, 60, 30, null);
         }
         if (car_list.size() >= 5) {
 
-            g.drawImage(car_list.get(4).drawImage().getImage(), column, 260, 60, 30, null);
+            g.drawImage(car_list.get(4).drawImage().getImage(), (int) car_list.get(4).distanceTraveled(), 260, 60, 30, null);
         }
     }
 
@@ -81,7 +81,13 @@ public class RacePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     void go() {
-        Controller.move();
+        if (car_list.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There is no cars added to the track!");
+        } else {
+            Controller.setCarList(car_list);
+            Controller.move();
+        }
+
     }
 
     void addCar(RaceCar car) {
@@ -93,6 +99,12 @@ public class RacePanel extends javax.swing.JPanel {
 
     void toggle() {
         Controller.toggleRunning();
+    }
+    
+    void reset(){
+        for (int i = 0; i < car_list.size(); i++) {
+            car_list.get(i).reset();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

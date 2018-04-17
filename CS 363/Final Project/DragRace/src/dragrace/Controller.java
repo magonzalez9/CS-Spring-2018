@@ -9,25 +9,49 @@ public class Controller extends JComponent {
     static int column = 1; // Track size will probably be from 1 - 1100
     static int row = 195;
     static boolean running = true;
+    static CarList car_list;
 
     Controller(JPanel panel) {
         Controller.panel = panel;
     }
 
-    static Thread thread = new Thread() {
+    public static void setCarList(CarList list) {
+        Controller.car_list = list;
+    }
 
+    static Thread thread = new Thread() {
         @Override
         public void run() {
             try {
                 while (true) {
                     if (running) {
                         panel.repaint();
-                        column += 10; // this will be the distance covered determined by our stats 
+
+                        // get car list and execute the run() method
+                        if (car_list.size() >= 1) {
+                            car_list.get(0).run();
+                        }
+                        if (car_list.size() >= 2) {
+
+                            car_list.get(1).run();
+                        }
+                        if (car_list.size() >= 3) {
+
+                            car_list.get(2).run();
+                        }
+                        if (car_list.size() >= 4) {
+
+                            car_list.get(3).run();
+                        }
+                        if (car_list.size() >= 5) {
+
+                            car_list.get(4).run();
+                        }
+
+                        column += 1; // this will be the distance covered determined by our stats 
                     }
-                    thread.sleep(60);
-                    if (column == 100) {
-                        toggleRunning();
-                    }
+                    thread.sleep(100);
+
                 }
 
             } catch (java.lang.InterruptedException ex) {

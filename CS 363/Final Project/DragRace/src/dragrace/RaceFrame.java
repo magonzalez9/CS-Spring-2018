@@ -12,7 +12,7 @@ public class RaceFrame extends javax.swing.JFrame {
     public RaceFrame() {
         initComponents();
         setVisible(true);
-        setSize(550, 445);
+        setSize(500, 400);
         displayRace = new DisplayRace();
 
         // set slider values
@@ -60,6 +60,7 @@ public class RaceFrame extends javax.swing.JFrame {
         accLabel = new javax.swing.JLabel();
         nitroLabel = new javax.swing.JLabel();
         fuelLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -71,11 +72,11 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(goButton);
-        goButton.setBounds(360, 330, 110, 40);
+        goButton.setBounds(360, 320, 110, 40);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(comboBox);
-        comboBox.setBounds(360, 100, 120, 22);
+        comboBox.setBounds(360, 80, 120, 27);
 
         speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -88,7 +89,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(speedSlider);
-        speedSlider.setBounds(30, 90, 190, 20);
+        speedSlider.setBounds(30, 70, 190, 20);
 
         addButton.setText("Add Car");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +98,11 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(addButton);
-        addButton.setBounds(370, 140, 110, 40);
+        addButton.setBounds(360, 120, 110, 40);
 
         list_label.setText("Car List");
         getContentPane().add(list_label);
-        list_label.setBounds(400, 80, 60, 16);
+        list_label.setBounds(400, 60, 60, 16);
 
         accSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -109,7 +110,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(accSlider);
-        accSlider.setBounds(30, 156, 190, 30);
+        accSlider.setBounds(30, 140, 190, 30);
 
         nitroSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -117,7 +118,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nitroSlider);
-        nitroSlider.setBounds(30, 220, 190, 26);
+        nitroSlider.setBounds(30, 200, 190, 29);
 
         fuelSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -125,7 +126,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fuelSlider);
-        fuelSlider.setBounds(30, 280, 190, 26);
+        fuelSlider.setBounds(30, 260, 190, 29);
 
         v4Option.setText("V4");
         v4Option.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +135,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v4Option);
-        v4Option.setBounds(30, 350, 50, 25);
+        v4Option.setBounds(30, 330, 50, 23);
 
         v6Option.setText("V6");
         v6Option.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +144,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v6Option);
-        v6Option.setBounds(80, 350, 50, 25);
+        v6Option.setBounds(80, 330, 50, 23);
 
         v8Option.setText("V8");
         v8Option.addActionListener(new java.awt.event.ActionListener() {
@@ -152,57 +153,66 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v8Option);
-        v8Option.setBounds(130, 350, 50, 25);
+        v8Option.setBounds(130, 330, 50, 23);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel1.setText("Engine Size:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 320, 110, 30);
+        jLabel1.setBounds(30, 300, 110, 30);
 
         jLabel2.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 18)); // NOI18N
         jLabel2.setText("Race Car Simulation");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(160, 10, 250, 40);
+        jLabel2.setBounds(160, 0, 250, 40);
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel3.setText("Top Speed:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 60, 110, 30);
+        jLabel3.setBounds(30, 40, 110, 30);
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel4.setText("Acceleration:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 120, 110, 40);
+        jLabel4.setBounds(30, 100, 110, 40);
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel5.setText("Nitro:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 190, 110, 30);
+        jLabel5.setBounds(30, 170, 110, 30);
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel6.setText("Fuel: ");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 250, 110, 30);
+        jLabel6.setBounds(30, 230, 110, 30);
 
         speedLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         speedLabel.setText("10");
         getContentPane().add(speedLabel);
-        speedLabel.setBounds(230, 80, 30, 40);
+        speedLabel.setBounds(230, 60, 30, 40);
 
         accLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         accLabel.setText("10");
         getContentPane().add(accLabel);
-        accLabel.setBounds(230, 150, 50, 40);
+        accLabel.setBounds(230, 130, 50, 40);
 
         nitroLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         nitroLabel.setText("10");
         getContentPane().add(nitroLabel);
-        nitroLabel.setBounds(230, 210, 50, 50);
+        nitroLabel.setBounds(230, 190, 50, 50);
 
         fuelLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         fuelLabel.setText("10");
         getContentPane().add(fuelLabel);
-        fuelLabel.setBounds(230, 270, 50, 50);
+        fuelLabel.setBounds(230, 250, 50, 50);
+
+        jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(360, 280, 110, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -274,6 +284,10 @@ public class RaceFrame extends javax.swing.JFrame {
         fuelLabel.setText("" + fuelSlider.getValue());
     }//GEN-LAST:event_fuelSliderStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       displayRace.reset();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +335,7 @@ public class RaceFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fuelLabel;
     private javax.swing.JSlider fuelSlider;
     private javax.swing.JButton goButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

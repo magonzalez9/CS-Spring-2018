@@ -1,6 +1,5 @@
 package dragrace;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class DisplayRace extends javax.swing.JFrame {
@@ -9,7 +8,7 @@ public class DisplayRace extends javax.swing.JFrame {
 
     public DisplayRace() {
         initComponents();
-        this.setBounds(500, 300, 1200, 350);
+        this.setBounds(0, 425, 1200, 320);
         rPanel = new RacePanel();
         add(new RacePanel());
         setVisible(true);
@@ -57,10 +56,8 @@ public class DisplayRace extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DisplayRace().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DisplayRace().setVisible(true);
         });
     }
 
@@ -76,7 +73,10 @@ public class DisplayRace extends javax.swing.JFrame {
     void addCar(RaceCar car){
         rPanel.addCar(car); 
         repaint();
-        
+    }
+    void reset(){
+        rPanel.reset(); 
+        repaint(); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
