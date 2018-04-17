@@ -12,7 +12,7 @@ public class RaceFrame extends javax.swing.JFrame {
     public RaceFrame() {
         initComponents();
         setVisible(true);
-        setSize(500, 400);
+        setSize(545, 415);
         displayRace = new DisplayRace();
 
         // set slider values
@@ -28,6 +28,10 @@ public class RaceFrame extends javax.swing.JFrame {
         fuelSlider.setMinimum(1);
         fuelSlider.setMaximum(10);
         fuelSlider.setValue(4);
+        trackLengthSlider.setMinimum(1);
+        trackLengthSlider.setMaximum(10);
+        trackLengthSlider.setValue(5);
+        saveButton.setEnabled(false);
 
     }
 
@@ -61,6 +65,10 @@ public class RaceFrame extends javax.swing.JFrame {
         nitroLabel = new javax.swing.JLabel();
         fuelLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        trackLengthSlider = new javax.swing.JSlider();
+        jLabel7 = new javax.swing.JLabel();
+        trackLengthLabel = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -72,11 +80,11 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(goButton);
-        goButton.setBounds(360, 320, 110, 40);
+        goButton.setBounds(420, 230, 80, 30);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(comboBox);
-        comboBox.setBounds(360, 80, 120, 27);
+        comboBox.setBounds(330, 80, 170, 22);
 
         speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -98,7 +106,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(addButton);
-        addButton.setBounds(360, 120, 110, 40);
+        addButton.setBounds(420, 110, 80, 30);
 
         list_label.setText("Car List");
         getContentPane().add(list_label);
@@ -118,7 +126,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nitroSlider);
-        nitroSlider.setBounds(30, 200, 190, 29);
+        nitroSlider.setBounds(30, 200, 190, 26);
 
         fuelSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -126,7 +134,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fuelSlider);
-        fuelSlider.setBounds(30, 260, 190, 29);
+        fuelSlider.setBounds(30, 260, 190, 26);
 
         v4Option.setText("V4");
         v4Option.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +143,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v4Option);
-        v4Option.setBounds(30, 330, 50, 23);
+        v4Option.setBounds(30, 330, 50, 25);
 
         v6Option.setText("V6");
         v6Option.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +152,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v6Option);
-        v6Option.setBounds(80, 330, 50, 23);
+        v6Option.setBounds(80, 330, 50, 25);
 
         v8Option.setText("V8");
         v8Option.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +161,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v8Option);
-        v8Option.setBounds(130, 330, 50, 23);
+        v8Option.setBounds(130, 330, 50, 25);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel1.setText("Engine Size:");
@@ -212,7 +220,33 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(360, 280, 110, 40);
+        jButton1.setBounds(320, 230, 80, 30);
+
+        trackLengthSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                trackLengthSliderStateChanged(evt);
+            }
+        });
+        getContentPane().add(trackLengthSlider);
+        trackLengthSlider.setBounds(320, 180, 150, 26);
+
+        jLabel7.setText("Track Length (miles)");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(330, 160, 130, 16);
+
+        trackLengthLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        trackLengthLabel.setText("10");
+        getContentPane().add(trackLengthLabel);
+        trackLengthLabel.setBounds(470, 170, 50, 50);
+
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(saveButton);
+        saveButton.setBounds(330, 110, 80, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -288,6 +322,14 @@ public class RaceFrame extends javax.swing.JFrame {
        displayRace.reset();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void trackLengthSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_trackLengthSliderStateChanged
+        trackLengthLabel.setText(""+trackLengthSlider.getValue());
+    }//GEN-LAST:event_trackLengthSliderStateChanged
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,11 +384,15 @@ public class RaceFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel list_label;
     private javax.swing.JLabel nitroLabel;
     private javax.swing.JSlider nitroSlider;
+    private javax.swing.JButton saveButton;
     private javax.swing.JLabel speedLabel;
     private javax.swing.JSlider speedSlider;
+    private javax.swing.JLabel trackLengthLabel;
+    private javax.swing.JSlider trackLengthSlider;
     private javax.swing.JRadioButton v4Option;
     private javax.swing.JRadioButton v6Option;
     private javax.swing.JRadioButton v8Option;

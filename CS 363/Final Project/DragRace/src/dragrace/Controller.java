@@ -27,30 +27,26 @@ public class Controller extends JComponent {
                     if (running) {
                         panel.repaint();
 
-                        // get car list and execute the run() method
+                        // Get the car list and execute run() so the cars...RUN!
                         if (car_list.size() >= 1) {
                             car_list.get(0).run();
                         }
                         if (car_list.size() >= 2) {
-
                             car_list.get(1).run();
                         }
                         if (car_list.size() >= 3) {
-
                             car_list.get(2).run();
                         }
                         if (car_list.size() >= 4) {
-
                             car_list.get(3).run();
                         }
                         if (car_list.size() >= 5) {
-
                             car_list.get(4).run();
                         }
 
                         column += 1; // this will be the distance covered determined by our stats 
                     }
-                    thread.sleep(100);
+                    thread.sleep(80);
 
                 }
 
