@@ -12,7 +12,7 @@ public class RaceFrame extends javax.swing.JFrame {
     public RaceFrame() {
         initComponents();
         setVisible(true);
-        setSize(545, 415);
+        setSize(545, 400);
         displayRace = new DisplayRace();
 
         // set slider values
@@ -30,7 +30,8 @@ public class RaceFrame extends javax.swing.JFrame {
         fuelSlider.setValue(4);
         trackLengthSlider.setMinimum(1);
         trackLengthSlider.setMaximum(10);
-        trackLengthSlider.setValue(5);
+        trackLengthSlider.setValue(1);
+        trackLengthSlider.setEnabled(false);
         saveButton.setEnabled(false);
 
     }
@@ -273,13 +274,15 @@ public class RaceFrame extends javax.swing.JFrame {
         }
 
         // Create the car object and store it in CarFreeList
-        ImageIcon car_image = new ImageIcon(new ImageIcon(getClass().getResource("images/"+freeList.remove(0))).getImage());
+        ImageIcon car_image = new ImageIcon(new ImageIcon(getClass().getResource("images/" + freeList.remove(0))).getImage());
         RaceCar race_car = new RaceCar(car_name, speed, acceleration, nitro, fuel, engine_size, car_image);
 
         // Now we want to draw the car on the panel 
         displayRace.addCar(race_car);
 
-//        
+        //enable trackLength
+        trackLengthSlider.setEnabled(true);
+
 //        System.out.println("speed: " + speed);
 //        System.out.println("Acc: " + acceleration);
 //        System.out.println("Engine Size: " + engine_size);
@@ -319,11 +322,11 @@ public class RaceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_fuelSliderStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       displayRace.reset();
+        displayRace.reset();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void trackLengthSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_trackLengthSliderStateChanged
-        trackLengthLabel.setText(""+trackLengthSlider.getValue());
+        trackLengthLabel.setText("" + trackLengthSlider.getValue());
     }//GEN-LAST:event_trackLengthSliderStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed

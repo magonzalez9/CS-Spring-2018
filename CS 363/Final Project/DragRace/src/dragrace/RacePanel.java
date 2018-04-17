@@ -18,7 +18,6 @@ public class RacePanel extends javax.swing.JPanel {
 
     static CarList car_list = new CarList();
     Graphics g;
-    int devider = 30;
 
     public RacePanel() {
         initComponents();
@@ -53,23 +52,23 @@ public class RacePanel extends javax.swing.JPanel {
     // Draw cars as the user adds them
     void drawCar(Graphics g) {
         if (car_list.size() >= 1) {
-            g.drawImage(car_list.get(0).drawImage().getImage(), (int) car_list.get(0).distanceTraveled(), 20, 60, 30, null);
+            g.drawImage(car_list.get(0).getCarImage().getImage(), (int) car_list.get(0).distanceTraveled(), 20, 60, 30, null);
         }
         if (car_list.size() >= 2) {
 
-            g.drawImage(car_list.get(1).drawImage().getImage(), (int) car_list.get(1).distanceTraveled(), 80, 60, 30, null);
+            g.drawImage(car_list.get(1).getCarImage().getImage(), (int) car_list.get(1).distanceTraveled(), 80, 60, 30, null);
         }
         if (car_list.size() >= 3) {
 
-            g.drawImage(car_list.get(2).drawImage().getImage(), (int) car_list.get(2).distanceTraveled(), 140, 60, 30, null);
+            g.drawImage(car_list.get(2).getCarImage().getImage(), (int) car_list.get(2).distanceTraveled(), 140, 60, 30, null);
         }
         if (car_list.size() >= 4) {
 
-            g.drawImage(car_list.get(3).drawImage().getImage(), (int) car_list.get(3).distanceTraveled(), 200, 60, 30, null);
+            g.drawImage(car_list.get(3).getCarImage().getImage(), (int) car_list.get(3).distanceTraveled(), 200, 60, 30, null);
         }
         if (car_list.size() >= 5) {
 
-            g.drawImage(car_list.get(4).drawImage().getImage(), (int) car_list.get(4).distanceTraveled(), 260, 60, 30, null);
+            g.drawImage(car_list.get(4).getCarImage().getImage(), (int) car_list.get(4).distanceTraveled(), 260, 60, 30, null);
         }
     }
 
