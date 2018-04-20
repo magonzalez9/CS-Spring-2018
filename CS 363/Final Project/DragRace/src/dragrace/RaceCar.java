@@ -67,7 +67,7 @@ public class RaceCar {
 
         // if car has crossed the finish line, then deccelerate
         // else keep going!
-        return distance_traveled += (current_speed * 0.44704);  // meters per second
+        return distance_traveled += (current_speed * 0.44704) * (.05);  // meters per second
 
 //            System.out.println("Speed after second " + i + ": " + current_speed);
 //            System.out.println("Distance traveled " + i + ": " + distance_traveled);

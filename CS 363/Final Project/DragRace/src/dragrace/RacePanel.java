@@ -41,11 +41,11 @@ public class RacePanel extends javax.swing.JPanel {
         // Draw the car as the user adds them
         drawCar(g);
         g.setColor(Color.WHITE);
-
+        System.out.println(column);
         // if cars reach dis distance then stop 
-        if (column >= 1000) {
-            toggle();
-        }
+//        if (column >= 20) {
+//            toggle();
+//        }
 
     }
 
