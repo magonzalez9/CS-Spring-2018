@@ -28,10 +28,10 @@ public class RaceFrame extends javax.swing.JFrame {
         fuelSlider.setMinimum(1);
         fuelSlider.setMaximum(10);
         fuelSlider.setValue(4);
-        trackLengthSlider.setMinimum(1);
-        trackLengthSlider.setMaximum(10);
-        trackLengthSlider.setValue(1);
-        trackLengthSlider.setEnabled(false);
+        distanceSlider.setMinimum(1);
+        distanceSlider.setMaximum(5);
+        distanceSlider.setValue(1);
+        distanceSlider.setEnabled(false);
         saveButton.setEnabled(false);
 
     }
@@ -66,7 +66,7 @@ public class RaceFrame extends javax.swing.JFrame {
         nitroLabel = new javax.swing.JLabel();
         fuelLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        trackLengthSlider = new javax.swing.JSlider();
+        distanceSlider = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
         trackLengthLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
@@ -223,15 +223,15 @@ public class RaceFrame extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(320, 230, 80, 30);
 
-        trackLengthSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+        distanceSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                trackLengthSliderStateChanged(evt);
+                distanceSliderStateChanged(evt);
             }
         });
-        getContentPane().add(trackLengthSlider);
-        trackLengthSlider.setBounds(320, 180, 150, 26);
+        getContentPane().add(distanceSlider);
+        distanceSlider.setBounds(320, 180, 150, 26);
 
-        jLabel7.setText("Track Length (miles)");
+        jLabel7.setText("Track Length ");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(330, 160, 130, 16);
 
@@ -276,12 +276,14 @@ public class RaceFrame extends javax.swing.JFrame {
         // Create the car object and store it in CarFreeList
         ImageIcon car_image = new ImageIcon(new ImageIcon(getClass().getResource("images/" + freeList.remove(0))).getImage());
         RaceCar race_car = new RaceCar(car_name, speed, acceleration, nitro, fuel, engine_size, car_image);
+        race_car.setDistance(distanceSlider.getValue());
 
-        // Now we want to draw the car on the panel 
+        // Now we want to draw the car on the panel
+        carList.add(race_car);
         displayRace.addCar(race_car);
 
         //enable trackLength
-        trackLengthSlider.setEnabled(true);
+        distanceSlider.setEnabled(true);
 
 //        System.out.println("speed: " + speed);
 //        System.out.println("Acc: " + acceleration);
@@ -325,9 +327,30 @@ public class RaceFrame extends javax.swing.JFrame {
         displayRace.reset();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void trackLengthSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_trackLengthSliderStateChanged
-        trackLengthLabel.setText("" + trackLengthSlider.getValue());
-    }//GEN-LAST:event_trackLengthSliderStateChanged
+    private void distanceSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_distanceSliderStateChanged
+        trackLengthLabel.setText("" + distanceSlider.getValue());
+
+        if (carList.size() >= 1) {
+            carList.get(0).setDistance(distanceSlider.getValue());
+             System.out.println(" DISTANCE: " + carList.get(0).getTrackDistance());
+        }
+        if (carList.size() >= 2) {
+            carList.get(1).setDistance(distanceSlider.getValue());
+             System.out.println(" DISTANCE: " + carList.get(1).getTrackDistance());
+        }
+        if (carList.size() >= 3) {
+            carList.get(2).setDistance(distanceSlider.getValue());
+             System.out.println(" DISTANCE: " + carList.get(2).getTrackDistance());
+        }
+        if (carList.size() >= 4) {
+            carList.get(3).setDistance(distanceSlider.getValue());
+             System.out.println(" DISTANCE: " + carList.get(3).getTrackDistance());
+        }
+        if (carList.size() >= 5) {
+            carList.get(4).setDistance(distanceSlider.getValue());
+            System.out.println(" DISTANCE: " + carList.get(4).getTrackDistance());
+        }
+    }//GEN-LAST:event_distanceSliderStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
@@ -377,6 +400,7 @@ public class RaceFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JComboBox comboBox;
+    private javax.swing.JSlider distanceSlider;
     private javax.swing.JLabel fuelLabel;
     private javax.swing.JSlider fuelSlider;
     private javax.swing.JButton goButton;
@@ -395,7 +419,6 @@ public class RaceFrame extends javax.swing.JFrame {
     private javax.swing.JLabel speedLabel;
     private javax.swing.JSlider speedSlider;
     private javax.swing.JLabel trackLengthLabel;
-    private javax.swing.JSlider trackLengthSlider;
     private javax.swing.JRadioButton v4Option;
     private javax.swing.JRadioButton v6Option;
     private javax.swing.JRadioButton v8Option;

@@ -32,17 +32,20 @@ public class DragRace {
         
         System.out.println(acceleration);
 
-//        for (double i = 1; i < 60; i++) { // 60 seconds
-//            if (!(current_speed >= top_speed)) {
-//                current_speed += acceleration;
-//            } else {
-//                current_speed = top_speed;
-//            }
-//            distance_traveled += (current_speed * 0.44704) ;  // meters per second
-//
-//            System.out.println("Speed after second " + i + ": " + current_speed);
-//            System.out.println("Distance traveled " + i + ": " + distance_traveled);
-//        }
+        for (int i = 1; i < 3600; i++) { // 60 seconds
+            if (!(current_speed >= top_speed)) {
+                current_speed += acceleration;
+            } else {
+                current_speed = top_speed;
+            }
+            distance_traveled += (current_speed * 0.44704) * (1000/16093.4) ;  // meters per second
+
+            System.out.println("Speed after second " + i + ": " + current_speed);
+            System.out.println("Distance traveled " + i + ": " + distance_traveled);
+            if (distance_traveled >= 1000) {
+                System.out.println("STOP");break; 
+            }
+        }
         
 
     }

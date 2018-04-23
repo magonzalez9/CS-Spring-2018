@@ -35,11 +35,23 @@ public class RaceCar {
     }
 
     public void setDistance(int distance) {
-        track_distance = distance;
+        track_distance = (distance - 1) * (8046.72 - 1609.34) / (5 - 1) + 1609.34;
     }
 
     public void useNitro() {
 
+    }
+
+    public double getTrackDistance() {
+        return track_distance;
+    }
+
+    public double getDistanceTraveled() {
+        return distance_traveled;
+    }
+
+    public ImageIcon getCarImage() {
+        return this.image;
     }
 
     public void editRaceCar(int speed, int acceleration, int nitro, int fuel, int engine_size) {
@@ -48,13 +60,6 @@ public class RaceCar {
         this.nitro = nitro;
         this.fuel = fuel;
         this.engine_size = engine_size;
-    }
-    public double distanceTraveled() {
-        return distance_traveled;
-    }
-
-    public ImageIcon getCarImage() {
-        return this.image;
     }
 
     public double run() {
@@ -67,16 +72,21 @@ public class RaceCar {
 
         // if car has crossed the finish line, then deccelerate
         // else keep going!
-        return distance_traveled += (current_speed * 0.44704) * (.05);  // meters per second
+        return distance_traveled += ((current_speed * 0.44704) * (1 / track_distance));  // meters per second
 
 //            System.out.println("Speed after second " + i + ": " + current_speed);
 //            System.out.println("Distance traveled " + i + ": " + distance_traveled);
     }
-
+    
+    public void decelerate(){
+        
+    }
     public void reset() {
         distance_traveled = 0;
         current_speed = 0;
     }
+    
+    
 
     @Override
     public String toString() {

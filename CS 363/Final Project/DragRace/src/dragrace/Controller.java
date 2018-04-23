@@ -61,7 +61,7 @@ public class Controller extends JComponent {
 
                         column += 1; // this will be the distance covered determined by our stats 
                     }
-                    thread.sleep(80);
+                    thread.sleep(1);
 
                 }
 
