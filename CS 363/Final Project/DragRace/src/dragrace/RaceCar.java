@@ -26,7 +26,7 @@ public class RaceCar {
 
     public RaceCar(String name, int speed, int acceleration, double nitro, double fuel, int engine_size, ImageIcon image) {
         this.name = name;
-        this.top_speed = (speed - 1) * (200 - 120) / (10 - 1) + 120; // in mph
+        this.top_speed = (speed - 1) * (200 - 120) / (10 - 1) + 120; // mph
         this.acceleration = 60 / ((acceleration - 1) * (3 - 7) / (10 - 1) + 7);
         this.nitro = nitro;
         this.fuel = fuel;
@@ -63,7 +63,6 @@ public class RaceCar {
     }
 
     public double run() {
-
         if (!(current_speed >= top_speed)) {
             current_speed += acceleration;
         } else {
@@ -72,26 +71,23 @@ public class RaceCar {
 
         // if car has crossed the finish line, then deccelerate
         // else keep going!
-        return distance_traveled += ((current_speed * 0.44704) * (1 / track_distance));  // meters per second
+        return distance_traveled += ((current_speed * 0.44704) * (1 / track_distance));  // distance = meters per second
 
 //            System.out.println("Speed after second " + i + ": " + current_speed);
 //            System.out.println("Distance traveled " + i + ": " + distance_traveled);
     }
-    
-    public void decelerate(){
-        
+
+    public void decelerate() {
+
     }
+
     public void reset() {
         distance_traveled = 0;
         current_speed = 0;
     }
-    
-    
 
     @Override
     public String toString() {
         return "RaceCar{" + "name=" + name + "," + ", top_speed=" + top_speed + ", acceleration=" + acceleration + ", nitro=" + nitro + ", fuel=" + fuel + ", engine_size=" + engine_size + ", current dis=" + distance_traveled + '}';
     }
-
-    // for distance we have 1 - 1000 meters, For stats,  1 = (1609.34) meters and 1000 == 16093.4 meters and 
 }

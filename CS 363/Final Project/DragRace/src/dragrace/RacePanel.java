@@ -5,9 +5,9 @@
  */
 package dragrace;
 
-import static dragrace.Controller.column;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +39,8 @@ public class RacePanel extends javax.swing.JPanel {
         super.paintComponent(g);
 
         // Draw the car as the user adds them
+        ImageIcon racetrack = new ImageIcon(new ImageIcon(getClass().getResource("racetrack.png")).getImage());
+        g.drawImage(racetrack.getImage(), 0, 0, null);
         drawCar(g);
         g.setColor(Color.WHITE);
         //System.out.println(column);
@@ -48,7 +50,6 @@ public class RacePanel extends javax.swing.JPanel {
 //        }
 
     }
-
     // Draw cars as the user adds them
     void drawCar(Graphics g) {
         if (car_list.size() >= 1) {

@@ -258,6 +258,8 @@ public class RaceFrame extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // Get car infomation
+        
+        System.out.println("HI");
         String car_name = JOptionPane.showInputDialog("Please input the name of the car: ");
         int speed = speedSlider.getValue();
         int acceleration = accSlider.getValue();
