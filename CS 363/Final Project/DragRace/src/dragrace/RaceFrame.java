@@ -28,8 +28,8 @@ public class RaceFrame extends javax.swing.JFrame {
         fuelSlider.setMinimum(1);
         fuelSlider.setMaximum(10);
         fuelSlider.setValue(4);
-        distanceSlider.setMinimum(1);
-        distanceSlider.setMaximum(5);
+        distanceSlider.setMinimum(5);
+        distanceSlider.setMaximum(100);
         distanceSlider.setValue(1);
         distanceSlider.setEnabled(false);
         saveButton.setEnabled(false);
