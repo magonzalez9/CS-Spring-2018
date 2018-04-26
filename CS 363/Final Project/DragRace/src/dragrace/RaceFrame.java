@@ -318,9 +318,9 @@ public class RaceFrame extends javax.swing.JFrame {
     private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged
         speedLabel.setText("" + speedSlider.getValue());
         max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
-        statsLabel.setText("" + max_stats + "/ 25");
+        statsLabel.setText("" + max_stats + "/ 24");
 
-        if (max_stats > 25) {
+        if (max_stats > 24) {
             saveButton.setEnabled(false);
             addButton.setEnabled(false);
         } else {
@@ -332,8 +332,8 @@ public class RaceFrame extends javax.swing.JFrame {
     private void accSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_accSliderStateChanged
         accLabel.setText("" + accSlider.getValue());
         max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
-        statsLabel.setText("" + max_stats + "/ 25");
-        if (max_stats > 25) {
+        statsLabel.setText("" + max_stats + "/ 24");
+        if (max_stats > 24) {
             saveButton.setEnabled(false);
             addButton.setEnabled(false);
         } else {
@@ -345,8 +345,8 @@ public class RaceFrame extends javax.swing.JFrame {
     private void nitroSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_nitroSliderStateChanged
         nitroLabel.setText("" + nitroSlider.getValue());
         max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
-        statsLabel.setText("" + max_stats + "/ 25");
-        if (max_stats > 25) {
+        statsLabel.setText("" + max_stats + "/ 24");
+        if (max_stats > 24) {
             saveButton.setEnabled(false);
             addButton.setEnabled(false);
         } else {
@@ -358,8 +358,8 @@ public class RaceFrame extends javax.swing.JFrame {
     private void fuelSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_fuelSliderStateChanged
         fuelLabel.setText("" + fuelSlider.getValue());
         max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
-        statsLabel.setText("" + max_stats + "/ 25");
-        if (max_stats > 25) {
+        statsLabel.setText("" + max_stats + "/ 24");
+        if (max_stats > 24) {
             saveButton.setEnabled(false);
             addButton.setEnabled(false);
         } else {
@@ -374,8 +374,11 @@ public class RaceFrame extends javax.swing.JFrame {
 
     private void distanceSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_distanceSliderStateChanged
 
-        milesLabel.setText(Math.round((((distanceSlider.getValue() - 1) * (10000 - 91.4) / (100 - 1) + 91.4) * 0.000621371192) * 100.0) / 100.0 + " Mile(s)");
-
+        milesLabel.setText(Math.round((((distanceSlider.getValue() - 1) * (8000 - 91.4) / (100 - 1) + 91.4) * 0.000621371192) * 100.0) / 100.0 + " Mile(s)");
+        
+        if (distanceSlider.getValue() >= 15) {
+            
+        }
         if (carList.size() >= 1) {
             carList.get(0).setDistance(distanceSlider.getValue());
 //             System.out.println(" DISTANCE: " + carList.get(0).getTrackDistance());
@@ -400,21 +403,24 @@ public class RaceFrame extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("SAVE!");
-        int speed = speedSlider.getValue();
-        int acceleration = accSlider.getValue();
-        int nitro = nitroSlider.getValue();
-        int fuel = fuelSlider.getValue();
-
-        int engine_size = 0;
-        if (v4Option.isSelected()) {
-            engine_size = 4;
-        } else if (v6Option.isSelected()) {
-            engine_size = 6;
+        if (comboBox.getItemCount() == 0) {
+            JOptionPane.showMessageDialog(null, "There are no cars added yet!");
         } else {
-            engine_size = 8;
+            int speed = speedSlider.getValue();
+            int acceleration = accSlider.getValue();
+            int nitro = nitroSlider.getValue();
+            int fuel = fuelSlider.getValue();
+
+            int engine_size = 0;
+            if (v4Option.isSelected()) {
+                engine_size = 4;
+            } else if (v6Option.isSelected()) {
+                engine_size = 6;
+            } else {
+                engine_size = 8;
+            }
+            carList.get(i).editRaceCar(speed, acceleration, nitro, fuel, engine_size);
         }
-        carList.get(i).editRaceCar(speed, acceleration, nitro, fuel, engine_size);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void v4OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v4OptionActionPerformed
@@ -432,7 +438,13 @@ public class RaceFrame extends javax.swing.JFrame {
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         // TODO add your handling code here:
         i = comboBox.getSelectedIndex();
-        saveButton.setEnabled(true);
+        if (!carList.isEmpty()) {
+
+            speedSlider.setValue(carList.get(i).speed_value);
+            accSlider.setValue(carList.get(i).acceleration_value);
+            nitroSlider.setValue(carList.get(i).nitro_value);
+            fuelSlider.setValue(carList.get(i).fuel_value);
+        }
     }//GEN-LAST:event_comboBoxActionPerformed
 
     /**

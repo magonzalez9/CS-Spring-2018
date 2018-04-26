@@ -58,8 +58,6 @@ public class Controller extends JComponent {
                                 car_list.get(4).activateNOS();
                             }
                         }
-
-                        column += 1; // this will be the distance covered determined by our stats 
                     } // 
                     thread.sleep(30);
 

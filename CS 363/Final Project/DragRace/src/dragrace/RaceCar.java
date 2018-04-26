@@ -25,6 +25,7 @@ public class RaceCar {
     private double acceleration;
     private double nitro;
     private double fuel;
+
     private double engine_power;
     private double track_distance;
 
@@ -32,44 +33,30 @@ public class RaceCar {
     private double distance_traveled = 0;
     private double current_speed;
 
+    // int values
+    public int speed_value;
+    public int acceleration_value;
+    public int nitro_value;
+    public int fuel_value;
+
     public RaceCar(String name, int speed, int acceleration, double nitro, double fuel, int engine_size, ImageIcon image) {
         // Set car identification 
         this.name = name;
         this.image = image;
 
         // Set the engine size 
-        switch (engine_size) {
-            case 4:
-                engine_power = 1;
-                break;
-            case 6:
-                engine_power = 3;
-                break;
-            case 8:
-                engine_power = 5;
-                break;
-            default:
-                engine_power = 1;
-                break;
-        }
+        this.editRaceCar(speed, acceleration, nitro, fuel, engine_size);
 
-        // Set car stats variables
-        this.top_speed = (double) ((speed - 1) * (200 - 145) / (10 - 1) + 145); // mph
-        this.acceleration = ((double) (60 / ((acceleration - 1) * (3 - 8) / (10 - 1) + 8))) + engine_power;
-        this.fuel = (fuel - 1) * (30000 - 10000) / (10 - 1) + 10000;
-        this.nitro = (nitro * .5) + engine_power;
-        this.nos_time = (int) (((nitro - 1) * (20 - 10) / (10 - 1) + 10) + (engine_power + 1));
-
-        // Set all temp variables
-        acc_temp = ((double) (60 / ((acceleration - 1) * (3 - 8) / (10 - 1) + 8))) + engine_power;
-        nos_temp = (nitro * .5) + engine_power;
-        nos_time_placeholder = this.nos_time;
-        fuel_temp = (fuel - 1) * (30000 - 10000) / (10 - 1) + 10000;
+        // Set slider values
+        speed_value = speed;
+        acceleration_value = acceleration;
+        nitro_value = (int) nitro;
+        fuel_value = (int) fuel;
 
     }
 
     public void setDistance(int distance) {
-        track_distance = (distance - 1) * (10000 - 91.44) / (100 - 1) + 91.44;
+        track_distance = (distance - 1) * (8000 - 91.44) / (100 - 1) + 91.44;
     }
 
     public void activateNOS() {
@@ -90,6 +77,10 @@ public class RaceCar {
 
     public String getCarName() {
         return this.name;
+    }
+
+    public double getFuel() {
+        return fuel;
     }
 
     // Main method that moves the car based on the stats that where entered!
@@ -120,7 +111,8 @@ public class RaceCar {
                     current_speed = top_speed;
                 }
             }
-            fuel -= ((current_speed * 0.44704) * ((current_speed * 0.44704) / track_distance)) + (engine_power * 1.5) + (acceleration * .1) + (nitro);
+            fuel -= ((current_speed * 0.44704) * ((current_speed * 0.44704) / track_distance)) + (engine_power * 2) + (acceleration * .1) + (nitro) + (top_speed * .004);
+            
         } else {
             // Out of fuel... you're done buddy. 
             current_speed -= .5;
@@ -134,6 +126,43 @@ public class RaceCar {
         return distance_traveled += ((current_speed * 0.44704) * ((current_speed * 0.44704) / track_distance));  // distance = meters per second
     }
 
+    public void editRaceCar(int speed, int acceleration, double nitro, double fuel, int engine_size) {
+        // Set the engine size 
+        switch (engine_size) {
+            case 4:
+                engine_power = .5;
+                break;
+            case 6:
+                engine_power = 1;
+                break;
+            case 8:
+                engine_power = 2.5;
+                break;
+            default:
+                engine_power = .5;
+                break;
+        }
+
+        // Set car stats variables
+        this.top_speed = (double) ((speed - 1) * (200 - 145) / (10 - 1) + 145); // mph
+        this.acceleration = ((double) (60 / ((acceleration - 1) * (3 - 8) / (10 - 1) + 8))) + engine_power;
+        this.fuel = (fuel - 1) * (25000 - 8000) / (10 - 1) + 8000;
+        this.nitro = (nitro * .5) + engine_power;
+        this.nos_time = (int) (((nitro - 1) * (18 - 9) / (10 - 1) + 7));
+
+        // Set all temp variables
+        acc_temp = ((double) (60 / ((acceleration - 1) * (3 - 8) / (10 - 1) + 8))) + engine_power;
+        nos_temp = (nitro * .5) + engine_power;
+        nos_time_placeholder = this.nos_time;
+        fuel_temp = (fuel - 1) * (25000 - 8000) / (10 - 1) + 8000;
+
+        // Set slider values
+        speed_value = speed;
+        acceleration_value = acceleration;
+        nitro_value = (int) nitro;
+        fuel_value = (int) fuel;
+    }
+
     public void reset() {
         distance_traveled = 0;
         current_speed = 0;
@@ -143,37 +172,6 @@ public class RaceCar {
         use_nos = false;
         fuel = fuel_temp;
 
-    }
-
-    public void editRaceCar(int speed, int acceleration, int nitro, int fuel, int engine_size) {
-        // Set the engine size 
-        switch (engine_size) {
-            case 4:
-                engine_power = 1;
-                break;
-            case 6:
-                engine_power = 3;
-                break;
-            case 8:
-                engine_power = 5;
-                break;
-            default:
-                engine_power = 1;
-                break;
-        }
-
-        // Set car stats variables
-        this.top_speed = (double) ((speed - 1) * (200 - 145) / (10 - 1) + 145); // mph
-        this.acceleration = ((double) (60 / ((acceleration - 1) * (3 - 8) / (10 - 1) + 8))) + engine_power;
-        this.fuel = (fuel - 1) * (30000 - 10000) / (10 - 1) + 10000;
-        this.nitro = (nitro * .5) + engine_power;
-        this.nos_time = (int) (((nitro - 1) * (20 - 10) / (10 - 1) + 10) + (engine_power + 1));
-
-        // Set all temp variables
-        acc_temp = ((double) (60 / ((acceleration - 1) * (3 - 8) / (10 - 1) + 8))) + engine_power;
-        nos_temp = (nitro * .5) + engine_power;
-        nos_time_placeholder = this.nos_time;
-        fuel_temp = (fuel - 1) * (30000 - 10000) / (10 - 1) + 10000;
     }
 
     @Override
