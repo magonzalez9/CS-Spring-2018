@@ -8,31 +8,34 @@ public class RaceFrame extends javax.swing.JFrame {
     DisplayRace displayRace;
     CarFreeList freeList = new CarFreeList();
     CarList carList = new CarList();
+    int i;
+    int max_stats = 25;
 
     public RaceFrame() {
         initComponents();
         setVisible(true);
-        setSize(545, 400);
+        setSize(580, 400);
         displayRace = new DisplayRace();
 
         // set slider values
         speedSlider.setMinimum(1);
         speedSlider.setMaximum(10);
-        speedSlider.setValue(4);
+        speedSlider.setValue(1);
         accSlider.setMinimum(1);
         accSlider.setMaximum(10);
-        accSlider.setValue(4);
+        accSlider.setValue(1);
         nitroSlider.setMinimum(1);
         nitroSlider.setMaximum(10);
-        nitroSlider.setValue(4);
+        nitroSlider.setValue(1);
         fuelSlider.setMinimum(1);
         fuelSlider.setMaximum(10);
-        fuelSlider.setValue(4);
-        distanceSlider.setMinimum(5);
+        fuelSlider.setValue(1);
+        distanceSlider.setMinimum(1);
         distanceSlider.setMaximum(100);
         distanceSlider.setValue(1);
+        comboBox.removeAllItems();
+        v4Option.setSelected(true);
         distanceSlider.setEnabled(false);
-        saveButton.setEnabled(false);
 
     }
 
@@ -67,13 +70,17 @@ public class RaceFrame extends javax.swing.JFrame {
         fuelLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         distanceSlider = new javax.swing.JSlider();
-        jLabel7 = new javax.swing.JLabel();
-        trackLengthLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
+        milesLabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        statsLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        goButton.setBackground(new java.awt.Color(0, 204, 51));
+        goButton.setForeground(new java.awt.Color(255, 255, 255));
         goButton.setText("Go");
         goButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,11 +88,16 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(goButton);
-        goButton.setBounds(420, 230, 80, 30);
+        goButton.setBounds(440, 260, 70, 30);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActionPerformed(evt);
+            }
+        });
         getContentPane().add(comboBox);
-        comboBox.setBounds(330, 80, 170, 27);
+        comboBox.setBounds(350, 80, 170, 30);
 
         speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -107,11 +119,11 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(addButton);
-        addButton.setBounds(420, 110, 80, 30);
+        addButton.setBounds(350, 120, 80, 30);
 
-        list_label.setText("Car List");
+        list_label.setText("Edit Race Car");
         getContentPane().add(list_label);
-        list_label.setBounds(400, 60, 60, 16);
+        list_label.setBounds(400, 50, 80, 20);
 
         accSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -127,7 +139,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nitroSlider);
-        nitroSlider.setBounds(30, 200, 190, 29);
+        nitroSlider.setBounds(30, 200, 190, 26);
 
         fuelSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -135,7 +147,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fuelSlider);
-        fuelSlider.setBounds(30, 260, 190, 29);
+        fuelSlider.setBounds(30, 260, 190, 26);
 
         v4Option.setText("V4");
         v4Option.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +156,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v4Option);
-        v4Option.setBounds(30, 330, 50, 23);
+        v4Option.setBounds(30, 330, 50, 25);
 
         v6Option.setText("V6");
         v6Option.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +165,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v6Option);
-        v6Option.setBounds(80, 330, 50, 23);
+        v6Option.setBounds(80, 330, 50, 25);
 
         v8Option.setText("V8");
         v8Option.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +174,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v8Option);
-        v8Option.setBounds(130, 330, 50, 23);
+        v8Option.setBounds(130, 330, 50, 25);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel1.setText("Engine Size:");
@@ -214,6 +226,8 @@ public class RaceFrame extends javax.swing.JFrame {
         getContentPane().add(fuelLabel);
         fuelLabel.setBounds(230, 250, 50, 50);
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Reset");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +235,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(320, 230, 80, 30);
+        jButton1.setBounds(340, 260, 70, 30);
 
         distanceSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -229,16 +243,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(distanceSlider);
-        distanceSlider.setBounds(320, 180, 150, 29);
-
-        jLabel7.setText("Track Length ");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(330, 160, 130, 16);
-
-        trackLengthLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        trackLengthLabel.setText("10");
-        getContentPane().add(trackLengthLabel);
-        trackLengthLabel.setBounds(470, 170, 50, 50);
+        distanceSlider.setBounds(320, 220, 150, 26);
 
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +252,25 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(saveButton);
-        saveButton.setBounds(330, 110, 80, 30);
+        saveButton.setBounds(440, 120, 80, 30);
+
+        milesLabel.setText("miles");
+        getContentPane().add(milesLabel);
+        milesLabel.setBounds(480, 210, 70, 40);
+
+        jLabel8.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        jLabel8.setText("Track Length:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(320, 190, 110, 30);
+
+        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(320, 70, 220, 110);
+
+        statsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        statsLabel.setText("4");
+        getContentPane().add(statsLabel);
+        statsLabel.setBounds(410, 310, 60, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,8 +281,6 @@ public class RaceFrame extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // Get car infomation
-        
-        System.out.println("HI");
         String car_name = JOptionPane.showInputDialog("Please input the name of the car: ");
         int speed = speedSlider.getValue();
         int acceleration = accSlider.getValue();
@@ -284,26 +305,11 @@ public class RaceFrame extends javax.swing.JFrame {
         carList.add(race_car);
         displayRace.addCar(race_car);
 
+        // Combo box
+        comboBox.addItem(race_car.getCarName());
         //enable trackLength
         distanceSlider.setEnabled(true);
-
-//        System.out.println("speed: " + speed);
-//        System.out.println("Acc: " + acceleration);
-//        System.out.println("Engine Size: " + engine_size);
-//        System.out.println(car_name);
     }//GEN-LAST:event_addButtonActionPerformed
-
-    private void v6OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v6OptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_v6OptionActionPerformed
-
-    private void v8OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v8OptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_v8OptionActionPerformed
-
-    private void v4OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v4OptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_v4OptionActionPerformed
 
     private void speedSliderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_speedSliderMousePressed
         // TODO add your handling code here:
@@ -311,18 +317,55 @@ public class RaceFrame extends javax.swing.JFrame {
 
     private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged
         speedLabel.setText("" + speedSlider.getValue());
+        max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
+        statsLabel.setText("" + max_stats + "/ 25");
+
+        if (max_stats > 25) {
+            saveButton.setEnabled(false);
+            addButton.setEnabled(false);
+        } else {
+            saveButton.setEnabled(true);
+            addButton.setEnabled(true);
+        }
     }//GEN-LAST:event_speedSliderStateChanged
 
     private void accSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_accSliderStateChanged
         accLabel.setText("" + accSlider.getValue());
+        max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
+        statsLabel.setText("" + max_stats + "/ 25");
+        if (max_stats > 25) {
+            saveButton.setEnabled(false);
+            addButton.setEnabled(false);
+        } else {
+            saveButton.setEnabled(true);
+            addButton.setEnabled(true);
+        }
     }//GEN-LAST:event_accSliderStateChanged
 
     private void nitroSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_nitroSliderStateChanged
         nitroLabel.setText("" + nitroSlider.getValue());
+        max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
+        statsLabel.setText("" + max_stats + "/ 25");
+        if (max_stats > 25) {
+            saveButton.setEnabled(false);
+            addButton.setEnabled(false);
+        } else {
+            saveButton.setEnabled(true);
+            addButton.setEnabled(true);
+        }
     }//GEN-LAST:event_nitroSliderStateChanged
 
     private void fuelSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_fuelSliderStateChanged
         fuelLabel.setText("" + fuelSlider.getValue());
+        max_stats = speedSlider.getValue() + accSlider.getValue() + nitroSlider.getValue() + fuelSlider.getValue();
+        statsLabel.setText("" + max_stats + "/ 25");
+        if (max_stats > 25) {
+            saveButton.setEnabled(false);
+            addButton.setEnabled(false);
+        } else {
+            saveButton.setEnabled(true);
+            addButton.setEnabled(true);
+        }
     }//GEN-LAST:event_fuelSliderStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -330,33 +373,67 @@ public class RaceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void distanceSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_distanceSliderStateChanged
-        trackLengthLabel.setText("" + distanceSlider.getValue());
+
+        milesLabel.setText(Math.round((((distanceSlider.getValue() - 1) * (10000 - 91.4) / (100 - 1) + 91.4) * 0.000621371192) * 100.0) / 100.0 + " Mile(s)");
 
         if (carList.size() >= 1) {
             carList.get(0).setDistance(distanceSlider.getValue());
-             System.out.println(" DISTANCE: " + carList.get(0).getTrackDistance());
+//             System.out.println(" DISTANCE: " + carList.get(0).getTrackDistance());
         }
         if (carList.size() >= 2) {
             carList.get(1).setDistance(distanceSlider.getValue());
-             System.out.println(" DISTANCE: " + carList.get(1).getTrackDistance());
+//             System.out.println(" DISTANCE: " + carList.get(1).getTrackDistance());
         }
         if (carList.size() >= 3) {
             carList.get(2).setDistance(distanceSlider.getValue());
-             System.out.println(" DISTANCE: " + carList.get(2).getTrackDistance());
+//             System.out.println(" DISTANCE: " + carList.get(2).getTrackDistance());
         }
         if (carList.size() >= 4) {
             carList.get(3).setDistance(distanceSlider.getValue());
-             System.out.println(" DISTANCE: " + carList.get(3).getTrackDistance());
+//             System.out.println(" DISTANCE: " + carList.get(3).getTrackDistance());
         }
         if (carList.size() >= 5) {
             carList.get(4).setDistance(distanceSlider.getValue());
-            System.out.println(" DISTANCE: " + carList.get(4).getTrackDistance());
+//            System.out.println(" DISTANCE: " + carList.get(4).getTrackDistance());
         }
     }//GEN-LAST:event_distanceSliderStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println("SAVE!");
+        int speed = speedSlider.getValue();
+        int acceleration = accSlider.getValue();
+        int nitro = nitroSlider.getValue();
+        int fuel = fuelSlider.getValue();
+
+        int engine_size = 0;
+        if (v4Option.isSelected()) {
+            engine_size = 4;
+        } else if (v6Option.isSelected()) {
+            engine_size = 6;
+        } else {
+            engine_size = 8;
+        }
+        carList.get(i).editRaceCar(speed, acceleration, nitro, fuel, engine_size);
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void v4OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v4OptionActionPerformed
+
+    }//GEN-LAST:event_v4OptionActionPerformed
+
+    private void v8OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v8OptionActionPerformed
+
+    }//GEN-LAST:event_v8OptionActionPerformed
+
+    private void v6OptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_v6OptionActionPerformed
+
+    }//GEN-LAST:event_v6OptionActionPerformed
+
+    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+        // TODO add your handling code here:
+        i = comboBox.getSelectedIndex();
+        saveButton.setEnabled(true);
+    }//GEN-LAST:event_comboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -414,13 +491,15 @@ public class RaceFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel list_label;
+    private javax.swing.JLabel milesLabel;
     private javax.swing.JLabel nitroLabel;
     private javax.swing.JSlider nitroSlider;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel speedLabel;
     private javax.swing.JSlider speedSlider;
-    private javax.swing.JLabel trackLengthLabel;
+    private javax.swing.JLabel statsLabel;
     private javax.swing.JRadioButton v4Option;
     private javax.swing.JRadioButton v6Option;
     private javax.swing.JRadioButton v8Option;

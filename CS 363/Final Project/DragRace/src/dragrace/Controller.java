@@ -30,32 +30,32 @@ public class Controller extends JComponent {
                         // Get the car list and execute run() so the cars...RUN!
                         if (car_list.size() >= 1) {
                             car_list.get(0).run();
-                            if (car_list.get(0).run() >= 1000) {
-                                toggleRunning();
+                            if (car_list.get(0).run() >= 400) {
+                                car_list.get(0).activateNOS();
                             }
                         }
                         if (car_list.size() >= 2) {
                             car_list.get(1).run();
-                            if (car_list.get(1).run() >= 1000) {
-                                toggleRunning();
+                            if (car_list.get(1).run() >= 400) {
+                                car_list.get(1).activateNOS();
                             }
                         }
                         if (car_list.size() >= 3) {
                             car_list.get(2).run();
-                            if (car_list.get(2).run() >= 1000) {
-                                toggleRunning();
+                            if (car_list.get(2).run() >= 400) {
+                                car_list.get(2).activateNOS();
                             }
                         }
                         if (car_list.size() >= 4) {
                             car_list.get(3).run();
-                            if (car_list.get(3).run() >= 1000) {
-                                toggleRunning();
+                            if (car_list.get(3).run() >= 400) {
+                                car_list.get(3).activateNOS();
                             }
                         }
                         if (car_list.size() >= 5) {
                             car_list.get(4).run();
-                            if (car_list.get(4).run() >= 1000) {
-                                toggleRunning();
+                            if (car_list.get(4).run() >= 400) {
+                                car_list.get(4).activateNOS();
                             }
                         }
 
@@ -84,7 +84,6 @@ public class Controller extends JComponent {
         } else if (thread.isAlive()) {
             toggleRunning();
         }
-        //column = 3;
     }
 
     public double milesToMeters(double miles) {

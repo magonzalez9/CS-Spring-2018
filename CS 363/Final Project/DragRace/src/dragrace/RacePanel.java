@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dragrace;
 
 import java.awt.Color;
@@ -42,19 +37,15 @@ public class RacePanel extends javax.swing.JPanel {
         ImageIcon racetrack = new ImageIcon(new ImageIcon(getClass().getResource("racetrack.png")).getImage());
         g.drawImage(racetrack.getImage(), 0, 0, null);
         drawCar(g);
-        g.setColor(Color.WHITE);
-        //System.out.println(column);
-        // if cars reach dis distance then stop 
-//        if (column >= 20) {
-//            toggle();
-//        }
+
 
     }
+
     // Draw cars as the user adds them
     void drawCar(Graphics g) {
         if (car_list.size() >= 1) {
             g.drawImage(car_list.get(0).getCarImage().getImage(), (int) car_list.get(0).getDistanceTraveled(), 20, 60, 30, null);
-            System.out.println(car_list.get(0).getDistanceTraveled());
+            //System.out.println(car_list.get(0).getDistanceTraveled());
         }
         if (car_list.size() >= 2) {
 
@@ -94,8 +85,7 @@ public class RacePanel extends javax.swing.JPanel {
     void addCar(RaceCar car) {
         car_list.addCar(car);
 
-//        System.out.println(car_list.get(0).toString());
-//        System.out.println(car_list.size());
+        System.out.println("Car TOSTRING: " + car_list.get(0).toString());
     }
 
     void toggle() {
@@ -106,6 +96,8 @@ public class RacePanel extends javax.swing.JPanel {
         for (int i = 0; i < car_list.size(); i++) {
             car_list.get(i).reset();
         }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
