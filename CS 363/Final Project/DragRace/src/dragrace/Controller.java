@@ -59,7 +59,7 @@ public class Controller extends JComponent {
                             }
                         }
                     } // 
-                    thread.sleep(30);
+                    thread.sleep(40);
 
                 }
 

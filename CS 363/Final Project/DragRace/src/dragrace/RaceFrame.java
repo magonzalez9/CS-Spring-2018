@@ -79,8 +79,8 @@ public class RaceFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        goButton.setBackground(new java.awt.Color(0, 204, 51));
-        goButton.setForeground(new java.awt.Color(255, 255, 255));
+        goButton.setBackground(new java.awt.Color(0, 255, 0));
+        goButton.setForeground(new java.awt.Color(0, 153, 0));
         goButton.setText("Go");
         goButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +139,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nitroSlider);
-        nitroSlider.setBounds(30, 200, 190, 26);
+        nitroSlider.setBounds(30, 200, 190, 29);
 
         fuelSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -147,7 +147,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fuelSlider);
-        fuelSlider.setBounds(30, 260, 190, 26);
+        fuelSlider.setBounds(30, 260, 190, 29);
 
         v4Option.setText("V4");
         v4Option.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +156,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v4Option);
-        v4Option.setBounds(30, 330, 50, 25);
+        v4Option.setBounds(30, 330, 50, 23);
 
         v6Option.setText("V6");
         v6Option.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v6Option);
-        v6Option.setBounds(80, 330, 50, 25);
+        v6Option.setBounds(80, 330, 50, 23);
 
         v8Option.setText("V8");
         v8Option.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +174,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(v8Option);
-        v8Option.setBounds(130, 330, 50, 25);
+        v8Option.setBounds(130, 330, 50, 23);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jLabel1.setText("Engine Size:");
@@ -226,8 +226,8 @@ public class RaceFrame extends javax.swing.JFrame {
         getContentPane().add(fuelLabel);
         fuelLabel.setBounds(230, 250, 50, 50);
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Reset");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +243,7 @@ public class RaceFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(distanceSlider);
-        distanceSlider.setBounds(320, 220, 150, 26);
+        distanceSlider.setBounds(320, 220, 150, 29);
 
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
