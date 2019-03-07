@@ -79,7 +79,7 @@ public class RacePanel extends javax.swing.JPanel {
                 flag_1 = true;
                 if (flag_1 && print_1) {
                     if (car_list.get(0).getDistanceTraveled() >= 1055) {
-                        System.out.println(car_list.get(0).getCarName());
+                        //System.out.println(car_list.get(0).getCarName());
                     }
                     print_1 = false;
                 }
@@ -93,7 +93,7 @@ public class RacePanel extends javax.swing.JPanel {
                 flag_2 = true;
                 if (flag_2 && print_2) {
                     if (car_list.get(1).getDistanceTraveled() >= 1055) {
-                        System.out.println(car_list.get(1).getCarName());
+                        //System.out.println(car_list.get(1).getCarName());
                     }
                     print_2 = false;
                 }
@@ -106,7 +106,7 @@ public class RacePanel extends javax.swing.JPanel {
                 flag_3 = true;
                 if (flag_3 && print_3) {
                     if (car_list.get(2).getDistanceTraveled() >= 1055) {
-                        System.out.println(car_list.get(2).getCarName());
+                        //System.out.println(car_list.get(2).getCarName());
                     }
                     print_3 = false;
                 }
@@ -119,7 +119,7 @@ public class RacePanel extends javax.swing.JPanel {
                 flag_4 = true;
                 if (flag_4 && print_4) {
                     if (car_list.get(3).getDistanceTraveled() >= 1055) {
-                        System.out.println(car_list.get(3).getCarName());
+                        //System.out.println(car_list.get(3).getCarName());
                     }
                     print_4 = false;
                 }
@@ -131,7 +131,7 @@ public class RacePanel extends javax.swing.JPanel {
                 flag_5 = true;
                 if (flag_5 && print_5) {
                     if (car_list.get(4).getDistanceTraveled() >= 1055) {
-                        System.out.println(car_list.get(4).getCarName());
+                        //System.out.println(car_list.get(4).getCarName());
                     }
                     print_5 = false;
                 }
@@ -159,7 +159,7 @@ public class RacePanel extends javax.swing.JPanel {
     void addCar(RaceCar car) {
         car_list.addCar(car);
 
-//        System.out.println("Car TOSTRING: " + car_list.get(0).toString());
+//        //System.out.println("Car TOSTRING: " + car_list.get(0).toString());
     }
 
     void toggle() {

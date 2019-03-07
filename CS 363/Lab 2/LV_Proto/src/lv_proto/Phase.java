@@ -45,8 +45,8 @@ public class Phase extends javax.swing.JPanel {
         yGraphRange = bottom - top;
         xGraphRange = right - left;
 
-        System.out.println("YRange: " + yGraphRange);
-        System.out.println("XRange " + xGraphRange);
+        //System.out.println("YRange: " + yGraphRange);
+        //System.out.println("XRange " + xGraphRange);
 
         // Set axis points
         left = r.x + 40;
@@ -78,7 +78,7 @@ public class Phase extends javax.swing.JPanel {
         int pX = pMax;
         int pixelX;
         String pValue;
-        System.out.println(dp_list);
+        //System.out.println(dp_list);
         // Draw ticks and their values for P
         for (int y = pMax; y >= pMin; y -= pInc) {
             pixelX = valueToPixels(pX, 'x') + left;
@@ -112,7 +112,7 @@ public class Phase extends javax.swing.JPanel {
 
         }
 
-        System.out.println(dp_list);
+        //System.out.println(dp_list);
 
     }
 
@@ -127,10 +127,10 @@ public class Phase extends javax.swing.JPanel {
         hRange = hMax - hMin;
         pRange = pMax - pMin;
 
-        System.out.println("hMax: " + hMax);
-        System.out.println("hMin: " + hMin);
-        System.out.println("pMax: " + pMax);
-        System.out.println("pMin: " + pMin);
+        //System.out.println("hMax: " + hMax);
+        //System.out.println("hMin: " + hMin);
+        //System.out.println("pMax: " + pMax);
+        //System.out.println("pMin: " + pMin);
 
     }
 

@@ -57,7 +57,7 @@ public class Globals {
 
     static void debug(String s) {
         if (debugging) {
-            System.out.print(s + "\n");
+            //System.out.print(s + "\n");
         }
     }
 

@@ -24,9 +24,9 @@ public class FileSystem {
     }
 
     public void save(File file, String data) {
-        System.out.println("FIRST");
-        System.out.println("Block: " + blockFreeList.toString());
-        System.out.println("inodes: " + inodeFreeList.toString());
+        //System.out.println("FIRST");
+        //System.out.println("Block: " + blockFreeList.toString());
+        //System.out.println("inodes: " + inodeFreeList.toString());
         // Begin to add. 
         short inode = inodeFreeList.remove(0);
         Inode theInode = (Inode) theDisk.blocks[inode];  // grab the first one
@@ -117,10 +117,10 @@ public class FileSystem {
             }
 
         // Display the disk for testing purposes
-        System.out.println(theDisk);
-        System.out.println("Block: " + blockFreeList.toString());
-        System.out.println("inodes: " + inodeFreeList.toString());
-        System.out.println("END");
+        //System.out.println(theDisk);
+        //System.out.println("Block: " + blockFreeList.toString());
+        //System.out.println("inodes: " + inodeFreeList.toString());
+        //System.out.println("END");
         Collections.sort(inodeFreeList);
     }
 
@@ -129,7 +129,7 @@ public class FileSystem {
     }
 
     public String load(File file) {
-        System.out.println(theDisk);
+        //System.out.println(theDisk);
         return file.getInode().load();
     }
 
@@ -141,9 +141,9 @@ public class FileSystem {
             byte[] b = new byte[8];
             Globals.getTheDisk().blocks[i].write(b);
             blockFreeList.add(i, i);
-            System.out.println(blockFreeList.toString());
+            //System.out.println(blockFreeList.toString());
         }
-        System.out.println(theDisk);
+        //System.out.println(theDisk);
         Collections.sort(inodeFreeList);
         Collections.sort(blockFreeList);
     }

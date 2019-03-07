@@ -61,7 +61,7 @@ public class Controller extends Thread {
     
     /** Forever loop, controlled by the variable stepsToTake */    
     public void run() {
-        System.out.println("running");
+        //System.out.println("running");
         for (;;) {
             if (stepsToTake > 0) {      // if we should take a step, do so
                 stepsToTake--;

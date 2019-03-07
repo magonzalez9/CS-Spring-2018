@@ -64,7 +64,7 @@ public class Controller extends JComponent {
                 }
 
             } catch (java.lang.InterruptedException ex) {
-                System.out.println(ex.getMessage());
+                //System.out.println(ex.getMessage());
             }
         }
     };

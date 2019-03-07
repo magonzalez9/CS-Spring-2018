@@ -32,7 +32,7 @@ public class BetterPanel extends javax.swing.JPanel {
         left = r.x + 15;
         top = r.y + 15;
         rows = list.length / cols + 1;
-        System.out.println("rows = " + rows);
+        //System.out.println("rows = " + rows);
 
         right = left + r.width - 30;
         bottom = top + r.height - 30;
@@ -88,12 +88,12 @@ public class BetterPanel extends javax.swing.JPanel {
     String[] list;
     
     void go(int cols, String text) {
-//        System.out.println("text = " + text);
-//        System.out.println("cols = " + cols);
+//        //System.out.println("text = " + text);
+//        //System.out.println("cols = " + cols);
         this.cols = cols; 
         list = text.split("\\s+");
         for (String s : list) {
-            System.out.println("s = " + s);
+            //System.out.println("s = " + s);
         }
     }
 

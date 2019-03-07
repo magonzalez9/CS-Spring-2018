@@ -69,7 +69,7 @@ public class ProtoLoveVehicle extends AbstractVehicle{
         double left = 10-theWorld.getStimulusStrength(leftSensorLocation());
 
         if (mySensors.theSensors.size() > 1) {
-            System.out.println("okay... time to generalize ProtoVehicle:step to sum all the drives!!");
+            //System.out.println("okay... time to generalize ProtoVehicle:step to sum all the drives!!");
             assert (false);
         }
 

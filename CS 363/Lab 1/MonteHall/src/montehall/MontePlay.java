@@ -72,7 +72,7 @@ public class MontePlay {
 
         // Set winning door prize to true
         doors.set(prizeDoor, true);
-//        System.out.println(doors.toString());
+//        //System.out.println(doors.toString());
 
         chosenDoor = doorNumber;
         for (int i = 0; i < doors.size(); i++) {
@@ -126,19 +126,19 @@ public class MontePlay {
             int doorSwitch = stayOrswitch;
             if (doorSwitch == 1) {
                 if (doors.get(chosenDoor) == true) {
-//                    System.out.println("Switched You loose");
+//                    //System.out.println("Switched You loose");
                     timesLost += 1;
                 } else {
-//                    System.out.println("Switched You win!");
+//                    //System.out.println("Switched You win!");
                     timesWon += 1;
                 }
 
             } else if (doorSwitch == 0) {
                 if (doors.get(chosenDoor) == true) {
-//                    System.out.println("Stay Woohoo you win ");
+//                    //System.out.println("Stay Woohoo you win ");
                     timesWon += 1;
                 } else {
-//                    System.out.println("Stay You loose");
+//                    //System.out.println("Stay You loose");
                     timesLost += 1;
                 }
             }

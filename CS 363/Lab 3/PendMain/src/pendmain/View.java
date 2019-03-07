@@ -66,7 +66,7 @@ public class View extends javax.swing.JPanel {
 
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("button????");
+        //System.out.println("button????");
         theController.toggleRunning();
     }//GEN-LAST:event_goButtonActionPerformed
 
@@ -74,7 +74,7 @@ public class View extends javax.swing.JPanel {
         // TODO add your handling code here:
         int mouseX = evt.getX();
         int mouseY = evt.getY();
-        System.out.println("x,y = " + mouseX + " " + mouseY);
+        //System.out.println("x,y = " + mouseX + " " + mouseY);
         theController.addPend(new Pendulum(300, 200, mouseX, mouseY));
         repaint();
     }//GEN-LAST:event_formMousePressed

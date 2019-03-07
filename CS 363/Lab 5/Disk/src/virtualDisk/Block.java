@@ -52,10 +52,10 @@ public abstract class Block {
         }
 
         for (int i = 0; i < 8; i++) {
-            System.out.println("b.bytes[" + i + "] = " + b.bytes[i]);
+            //System.out.println("b.bytes[" + i + "] = " + b.bytes[i]);
         }
         for (int i = 0; i < 4; i++) {
-            System.out.println("b.decodeLink(" + i * 2 + ") = " + b.decodeLink(i * 2));
+            //System.out.println("b.decodeLink(" + i * 2 + ") = " + b.decodeLink(i * 2));
         }
     }
 }

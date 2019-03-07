@@ -112,7 +112,7 @@ public class RaceCar {
                 }
             }
             fuel -= ((current_speed * 0.44704) * ((current_speed * 0.44704) / track_distance)) + (engine_power * 2) + (acceleration * .1) + (nitro) + (top_speed * .004);
-            
+
         } else {
             // Out of fuel... you're done buddy. 
             current_speed -= .5;

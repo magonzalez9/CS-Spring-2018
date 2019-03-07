@@ -54,13 +54,13 @@ public class Lab0aFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void theComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theComboBoxActionPerformed
-        System.out.println("in action performed");
+        //System.out.println("in action performed");
         if (theComboBox.getSelectedItem() == null) {
-            System.out.println("oops");
+            //System.out.println("oops");
             return;
         }
         String s = (String) theComboBox.getSelectedItem();
-        System.out.println("s = " + s);
+        //System.out.println("s = " + s);
         if (otherFrame == null) {
             return;
         }

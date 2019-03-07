@@ -94,7 +94,7 @@ public class Grapher extends javax.swing.JPanel {
             xTraverse += 2;
         }
 
-        System.out.println(dp_list);
+        //System.out.println(dp_list);
 
     }
 
@@ -103,9 +103,9 @@ public class Grapher extends javax.swing.JPanel {
         hMax = dp_list.getMax();
         hMin = dp_list.getMin();
         hRange = hMax - hMin;
-        System.out.println("Max: " + hMax);
-        System.out.println("Min: " + hMin);
-        System.out.println(dp_list);
+        //System.out.println("Max: " + hMax);
+        //System.out.println("Min: " + hMin);
+        //System.out.println(dp_list);
 
     }
 

@@ -33,14 +33,14 @@ static DataPairList list = new DataPairList();
 //            int dp = (int) (β*hp2 - b*p2);
 //            h2 += dh;
 //            p2 += dp;
-////            System.out.print("h = " + h);
-////            System.out.print("  p = " + p);
-////            System.out.print("  h2 = " + h2);
-////            System.out.println("  p2 = " + p2);
+////            //System.out.print("h = " + h);
+////            //System.out.print("  p = " + p);
+////            //System.out.print("  h2 = " + h2);
+////            //System.out.println("  p2 = " + p2);
 //            list.add(new DataPair(h,p));
 //            
 //        }
-//            //System.out.println( list);
+//            ////System.out.println( list);
 
   }
 

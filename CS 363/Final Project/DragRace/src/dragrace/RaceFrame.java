@@ -381,23 +381,23 @@ public class RaceFrame extends javax.swing.JFrame {
         }
         if (carList.size() >= 1) {
             carList.get(0).setDistance(distanceSlider.getValue());
-//             System.out.println(" DISTANCE: " + carList.get(0).getTrackDistance());
+//             //System.out.println(" DISTANCE: " + carList.get(0).getTrackDistance());
         }
         if (carList.size() >= 2) {
             carList.get(1).setDistance(distanceSlider.getValue());
-//             System.out.println(" DISTANCE: " + carList.get(1).getTrackDistance());
+//             //System.out.println(" DISTANCE: " + carList.get(1).getTrackDistance());
         }
         if (carList.size() >= 3) {
             carList.get(2).setDistance(distanceSlider.getValue());
-//             System.out.println(" DISTANCE: " + carList.get(2).getTrackDistance());
+//             //System.out.println(" DISTANCE: " + carList.get(2).getTrackDistance());
         }
         if (carList.size() >= 4) {
             carList.get(3).setDistance(distanceSlider.getValue());
-//             System.out.println(" DISTANCE: " + carList.get(3).getTrackDistance());
+//             //System.out.println(" DISTANCE: " + carList.get(3).getTrackDistance());
         }
         if (carList.size() >= 5) {
             carList.get(4).setDistance(distanceSlider.getValue());
-//            System.out.println(" DISTANCE: " + carList.get(4).getTrackDistance());
+//            //System.out.println(" DISTANCE: " + carList.get(4).getTrackDistance());
         }
     }//GEN-LAST:event_distanceSliderStateChanged
 

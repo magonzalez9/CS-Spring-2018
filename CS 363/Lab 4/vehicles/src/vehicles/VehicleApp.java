@@ -14,7 +14,7 @@ public class VehicleApp extends java.applet.Applet {
     
     /** Initializes the applet VehicleApp */
     public void init() {
-        //System.out.println("initing");
+        ////System.out.println("initing");
         initComponents();
         reset();
     }
@@ -27,7 +27,7 @@ public class VehicleApp extends java.applet.Applet {
     }
 
 //    public void stop() {
-//        System.out.println("adieu"); 
+//        //System.out.println("adieu"); 
 //        System.exit(0);
 //    }
     

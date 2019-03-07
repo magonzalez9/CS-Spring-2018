@@ -91,7 +91,7 @@ public class ProtoWorld extends AbstractWorld {
 
     private void moveIt(AbstractVehicle theVehicle, AbstractDriveOutput theOutput) {
         if (debugging) {
-            System.out.println("Applying " + theOutput + " to  " + theVehicle);
+            //System.out.println("Applying " + theOutput + " to  " + theVehicle);
         }
         double leftOutput = theOutput.getLeftWheelOutput();
         double rightOutput = theOutput.getRightWheelOutput();

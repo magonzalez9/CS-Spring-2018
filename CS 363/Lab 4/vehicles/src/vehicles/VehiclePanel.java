@@ -256,7 +256,7 @@ public class VehiclePanel extends javax.swing.JPanel {
         try {
             theController.setDelay(Integer.parseInt(speedTF.getText()));
         } catch (Exception e) {
-            System.out.println("Couldn't get int. Check input.");
+            //System.out.println("Couldn't get int. Check input.");
         }
     }
 
@@ -269,7 +269,7 @@ public class VehiclePanel extends javax.swing.JPanel {
             return Integer.parseInt(sourceStrengthTF.getText());
         } catch (Exception e) {
 
-            System.out.println("Couldn't get int. Check input. Used 10000.");
+            //System.out.println("Couldn't get int. Check input. Used 10000.");
             return 10000;
         }
     }
@@ -279,7 +279,7 @@ public class VehiclePanel extends javax.swing.JPanel {
             return Integer.parseInt(vehicleSizeTF.getText());
         } catch (Exception e) {
 
-            System.out.println("Couldn't get int. Check input. Used 10000.");
+            //System.out.println("Couldn't get int. Check input. Used 10000.");
             return 15;
         }
     }
